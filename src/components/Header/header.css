@@ -1,0 +1,71 @@
+/* menu bar latéral */
+.menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 20vw;
+  height: 100vh;
+  background: var(--black);
+}
+.menuXs {
+  display: flex;
+  justify-content: center;
+  padding-top: 20px;
+  width: 60px;
+  height: 100vh;
+  background: var(--black);
+}
+
+/* logo + burger */
+.containerLogo {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+}
+/* burger */
+.burgerToggle {
+  width: 2vw;
+  cursor: pointer;
+}
+.burgerToggle img {
+  width: 100%;
+}
+/* logo */
+.logo {
+  width: 15vw;
+}
+.logo img {
+  width: 100%;
+}
+/* nav */
+nav {
+  width: 100%;
+  height: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+/* lien */
+.lienNavigation {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+
+  height: 60px;
+}
+.lienNavigation a {
+  font-size: 2vw;
+  color: white;
+  text-decoration: none;
+  margin-left: 10px;
+}
+.lienNavigation:hover {
+  background: var(--bg-violet-clair);
+}
+.containerLien {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0 50px;
+}
