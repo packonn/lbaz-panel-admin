@@ -39,33 +39,39 @@ const Header = () => {
       </div>
       <nav>
         <div className='lienNavigation'>
-          <div className='containerLien'>
-            <Link to='/spectacle'>Spectacle</Link>
+          <div className='logoNav'>
             <FontAwesomeIcon
               icon='glasses'
               color='white'
-              style={{ height: "20px", width: "20px" }}
+              style={{ height: "auto", width: "2vw" }}
             />
+          </div>
+          <div className='lienNav'>
+            <Link to='/spectacle'>Spectacle</Link>
           </div>
         </div>
         <div className='lienNavigation'>
-          <div className='containerLien'>
-            <Link to='/actualite'>Actualité</Link>
+          <div className='logoNav'>
             <FontAwesomeIcon
               icon='newspaper'
               color='white'
-              style={{ height: "20px", width: "20px" }}
+              style={{ height: "auto", width: "2vw" }}
             />
+          </div>
+          <div className='lienNav'>
+            <Link to='/actualite'>Actualité</Link>
           </div>
         </div>
         <div className='lienNavigation'>
-          <div className='containerLien'>
-            <Link to='/agenda'>Agenda</Link>
+          <div className='logoNav'>
             <FontAwesomeIcon
               icon='calendar-alt'
               color='white'
-              style={{ height: "20px", width: "20px" }}
+              style={{ height: "auto", width: "1.7vw" }}
             />
+          </div>
+          <div className='lienNav'>
+            <Link to='/agenda'>Agenda</Link>
           </div>
         </div>
       </nav>
@@ -75,6 +81,41 @@ const Header = () => {
       <div className='burgerToggle' onClick={() => setToggleMenu(!toggleMenu)}>
         <img src={burger} alt='Logo pour toggle menu ' />
       </div>
+      <nav>
+        <div className='lienNavigation'>
+          <div className='containerLien'>
+            <Link to='/spectacle'>
+              <FontAwesomeIcon
+                icon='glasses'
+                color='white'
+                style={{ height: "auto", width: "2vw" }}
+              />
+            </Link>
+          </div>
+        </div>
+        <div className='lienNavigation'>
+          <div className='containerLien'>
+            <Link to='/actualite'>
+              <FontAwesomeIcon
+                icon='newspaper'
+                color='white'
+                style={{ height: "auto", width: "2vw" }}
+              />
+            </Link>
+          </div>
+        </div>
+        <div className='lienNavigation'>
+          <div className='containerLien'>
+            <Link to='/agenda'>
+              <FontAwesomeIcon
+                icon='calendar-alt'
+                color='white'
+                style={{ height: "auto", width: "2vw" }}
+              />
+            </Link>
+          </div>
+        </div>
+      </nav>
     </div>
   );
 };

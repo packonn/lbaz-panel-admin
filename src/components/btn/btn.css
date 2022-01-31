@@ -1,0 +1,16 @@
+.rose {
+  background-color: var(--rose);
+  color: var(--black);
+}
+.gris {
+  background-color: var(--bg-gris);
+  color: var(--black);
+}
+
+button {
+  cursor: pointer;
+  padding: 10px 15px;
+  border-radius: 10px;
+  font-weight: bold;
+  border: none;
+}

@@ -3,13 +3,14 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  min-height: 100vh;
   width: 20vw;
-  height: 100vh;
   background: var(--black);
 }
 .menuXs {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   padding-top: 20px;
   width: 60px;
   height: 100vh;
@@ -18,9 +19,8 @@
 
 /* logo + burger */
 .containerLogo {
-  margin-top: 20px;
+  padding-top: 20px;
   display: flex;
-  align-items: center;
 }
 /* burger */
 .burgerToggle {
@@ -39,33 +39,36 @@
 }
 /* nav */
 nav {
+  padding-top: 30vh;
   width: 100%;
-  height: 70%;
   display: flex;
   flex-direction: column;
+}
+.logoNav {
+  display: flex;
   justify-content: center;
+  width: 40%;
+}
+.lienNav {
+  width: 60%;
+}
+.lienNav svg {
+  width: 100px;
 }
 /* lien */
 .lienNavigation {
+  cursor: pointer;
+  width: 100%;
   display: flex;
-  justify-content: start;
+  justify-content: center;
   align-items: center;
-
-  height: 60px;
+  height: 80px;
 }
 .lienNavigation a {
-  font-size: 2vw;
+  font-size: 1.5vw;
   color: white;
   text-decoration: none;
-  margin-left: 10px;
 }
 .lienNavigation:hover {
   background: var(--bg-violet-clair);
-}
-.containerLien {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  padding: 0 50px;
 }
