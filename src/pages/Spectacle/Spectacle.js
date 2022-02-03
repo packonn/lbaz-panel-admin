@@ -28,25 +28,6 @@ const Spectacle = () => {
           </div>
         </div>
       </header>
-      {/* 
-        <div className='sideRight'>
-          <div className='containerImg'>
-            <label>Images</label>
-            <input multiple type='file' />
-            <div className='previousImg'></div>
-          </div>
-          <div className='containerMusic'>
-            <label>Musiques</label>
-            <input multiple type='file' />
-            <div className='previousMusic'></div>
-          </div>
-          <div className='containerVideo'>
-            <label>Video</label>
-            <input multiple type='file' />
-            <div className='previousVideo'></div>
-          </div>
-        </div>
-       */}
       <form>
         <div className='sideLeft'>
           <InputSmallText

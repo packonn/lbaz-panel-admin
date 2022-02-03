@@ -38,42 +38,48 @@ const Header = () => {
         </div>
       </div>
       <nav>
-        <div className='lienNavigation'>
-          <div className='logoNav'>
-            <FontAwesomeIcon
-              icon='glasses'
-              color='white'
-              style={{ height: "auto", width: "2vw" }}
-            />
+        <Link to='/spectacle'>
+          <div className='lienNavigation'>
+            <div className='logoNav'>
+              <FontAwesomeIcon
+                icon='glasses'
+                color='white'
+                style={{ height: "auto", width: "2vw" }}
+              />
+            </div>
+            <div className='lienNav'>
+              <span>Spectacle</span>
+            </div>
           </div>
-          <div className='lienNav'>
-            <Link to='/spectacle'>Spectacle</Link>
+        </Link>
+        <Link to='/actualite'>
+          <div className='lienNavigation'>
+            <div className='logoNav'>
+              <FontAwesomeIcon
+                icon='newspaper'
+                color='white'
+                style={{ height: "auto", width: "2vw" }}
+              />
+            </div>
+            <div className='lienNav'>
+              <span>Actualité</span>
+            </div>
           </div>
-        </div>
-        <div className='lienNavigation'>
-          <div className='logoNav'>
-            <FontAwesomeIcon
-              icon='newspaper'
-              color='white'
-              style={{ height: "auto", width: "2vw" }}
-            />
+        </Link>
+        <Link to='/agenda'>
+          <div className='lienNavigation'>
+            <div className='logoNav'>
+              <FontAwesomeIcon
+                icon='calendar-alt'
+                color='white'
+                style={{ height: "auto", width: "1.7vw" }}
+              />
+            </div>
+            <div className='lienNav'>
+              <span>Agenda</span>
+            </div>
           </div>
-          <div className='lienNav'>
-            <Link to='/actualite'>Actualité</Link>
-          </div>
-        </div>
-        <div className='lienNavigation'>
-          <div className='logoNav'>
-            <FontAwesomeIcon
-              icon='calendar-alt'
-              color='white'
-              style={{ height: "auto", width: "1.7vw" }}
-            />
-          </div>
-          <div className='lienNav'>
-            <Link to='/agenda'>Agenda</Link>
-          </div>
-        </div>
+        </Link>
       </nav>
     </div>
   ) : (

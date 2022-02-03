@@ -2,11 +2,11 @@ import "./inputFiles.css";
 
 const InputFiles = ({ name, label, title }) => {
   return (
-    <div className='containerFile'>
+    <div className="containerFile">
       <h3>{title}</h3>
-      <div className='containerInput'>
+      <div className="containerInput">
         <label>{label}</label>
-        <input type='file' name={name} id={name} multiple />
+        <input type="file" name={name} id={name} multiple />
       </div>
     </div>
   );
