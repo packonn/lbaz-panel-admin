@@ -63,9 +63,19 @@ const Spectacle = () => {
         </div>
         <div className='sideRight'>
           <InputFiles
-            name={"image"}
+            name={"affiche"}
+            label={"Affiche du spectacle"}
+            title={"Affiche"}
+          />
+          <InputFiles
+            name={"imgXL"}
             label={"Photo du spectacle"}
-            title={"Images"}
+            title={"Image"}
+          />
+          <InputFiles
+            name={"musiques"}
+            label={"Musique du spectacle"}
+            title={"Musiques"}
           />
         </div>
       </form>

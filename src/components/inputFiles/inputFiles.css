@@ -1,27 +1,34 @@
 .containerFiles {
   border-radius: 10px;
   overflow: hidden;
+  background: #fff;
+  margin-bottom: 20px;
 }
-.title{
+label {
+  display: flex;
+  align-items: center;
+  color: #000;
+}
+.title {
+  font-size: 20px;
   display: flex;
   align-items: center;
   padding: 0 20px;
   height: 50px;
+  color: #fff;
   background: var(--bg-violet-clair);
 }
-.containerInput{
+.containerInput {
   display: flex;
   justify-content: space-between;
-}
-.containerInput input{
-  display: flex;
-  border: 1px solid red;
-  width: 120px;
+  height: 100px;
+  padding: 0px 20px 0px 20px;
 }
 
 .button-wrapper {
+  margin: auto 0;
   position: relative;
-  width: 120px;
+  width: 140px;
   text-align: center;
 }
 
@@ -30,22 +37,27 @@
   z-index: 0;
   display: inline-block;
   width: 100%;
-  background: var( --bg-gris);
+  background: var(--bg-gris);
   cursor: pointer;
   color: #000;
+  font-weight: bold;
   padding: 10px 0;
-  font-size:12px;
-  border-radius: 10px ;
+  font-size: 15px;
+  border-radius: 10px;
 }
 
 #upload {
-    display: inline-block;
-    position: absolute;
-    z-index: 1;
-    width: 100%;
-    height: 50px;
-    top: 0;
-    left: 0;
-    opacity: 0;
-    cursor: pointer;
+  display: inline-block;
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  height: 50px;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+.previousImg {
+  height: 100%;
+  padding: 0px 20px 20px 20px;
 }
