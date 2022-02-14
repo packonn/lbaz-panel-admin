@@ -7,10 +7,12 @@
 label {
   display: flex;
   align-items: center;
+}
+.containerInput label {
   color: #000;
+  font-size: 15px;
 }
 .title {
-  font-size: 20px;
   display: flex;
   align-items: center;
   padding: 0 20px;
@@ -18,8 +20,13 @@ label {
   color: #fff;
   background: var(--bg-violet-clair);
 }
+.title p {
+  font-size: 20px;
+}
 .containerInput {
   display: flex;
+  align-items: center;
+
   justify-content: space-between;
   height: 100px;
   padding: 0px 20px 0px 20px;
@@ -57,7 +64,14 @@ label {
   opacity: 0;
   cursor: pointer;
 }
-.previousImg {
+.previous {
   height: 100%;
   padding: 0px 20px 20px 20px;
+}
+.previousMusic {
+  color: black;
+  padding: 10px 0;
+}
+.dashed {
+  border-bottom: grey solid 1px;
 }
