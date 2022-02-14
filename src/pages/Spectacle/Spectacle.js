@@ -10,6 +10,7 @@ import InputFiles from "../../components/inputFiles/InputFiles";
 import InputVideo from "../../components/inputVideo/InputVideo";
 import { useState } from "react";
 import axios from "axios";
+import InputDate from "../../components/inputDate/InputDate";
 
 library.add(fab, faUser);
 
@@ -71,6 +72,20 @@ const Spectacle = () => {
   const [histoire, setHistoire] = useState("");
   const [mes, setMes] = useState("");
   const [noteAuteur, setNoteAuteur] = useState("");
+  // Logique date
+  const [date, setDate] = useState("");
+  const [allDate, setAllDate] = useState([]);
+  const handleClick = () => {
+    if (date !== "") {
+      const newArray = [...allDate];
+      newArray.push(date);
+      setAllDate(newArray);
+    }
+  };
+  const handleDate = (e) => {
+    setDate(e.target.value);
+  };
+  // Envoie du formulaire
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -83,6 +98,7 @@ const Spectacle = () => {
     formData.append("affiche", affiche);
     formData.append("imgXL", imgXL);
     formData.append("video", videos);
+    formData.append("date", allDate);
 
     let i = 0;
     musiques.forEach((file) => {
@@ -164,7 +180,7 @@ const Spectacle = () => {
             placeholder={"Lien vers BoxSongs"}
             max={100}
           />
-          <Btn txt={"Ajouter le spectacle"} color={"gris"} />
+          <Btn txt={"Ajouter le spectacle"} color={"gris"} type={"submit"} />
         </div>
         <div className='sideRight'>
           <InputFiles
@@ -194,6 +210,11 @@ const Spectacle = () => {
             url={url}
             setUrl={setUrl}
             videos={videos}
+          />
+          <InputDate
+            allDate={allDate}
+            handleClick={handleClick}
+            handleDate={handleDate}
           />
         </div>
       </form>

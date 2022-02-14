@@ -23,7 +23,7 @@ const InputVideo = ({ url, handleVideo, setUrl, videos }) => {
                 handleVideo();
               }
             }}>
-            ajouté le lien
+            ajouter le lien
           </span>
         </div>
       </div>

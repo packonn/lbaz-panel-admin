@@ -1,8 +1,8 @@
 import "./btn.css";
 
-const Btn = ({ txt, color }) => {
+const Btn = ({ txt, color, type, handleClick }) => {
   return (
-    <button type='submit' className={color}>
+    <button type={type} className={color} onClick={handleClick}>
       {txt}
     </button>
   );

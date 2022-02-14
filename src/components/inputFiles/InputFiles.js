@@ -10,35 +10,6 @@ const InputFiles = ({
   previousMusiques,
   musiques,
 }) => {
-  // const [Affiche, setAffiche] = useState();
-  // const [previousAffiche, setPreviousAffiche] = useState("");
-
-  // const [ImgXL, setImgXL] = useState();
-  // const [previousImgXL, setPreviousImgXL] = useState("");
-
-  // const [musiques, setMusiques] = useState([]);
-  // const [previousMusiques, setPreviousMusiques] = useState([]);
-
-  // const handleFiles = (e) => {
-  //   if (name === "affiche") {
-  //     setAffiche(e.target.files[0]);
-  //     setPreviousAffiche(URL.createObjectURL(e.target.files[0]));
-  //   }
-  //   if (name === "imgXL") {
-  //     setImgXL(e.target.files[0]);
-  //     setPreviousImgXL(URL.createObjectURL(e.target.files[0]));
-  //   }
-  //   if (name === "musiques") {
-  //     const newArray = [...musiques];
-  //     newArray.push(e.target.files[0]);
-  //     setMusiques(newArray);
-
-  //     let arrayPrevious = [...previousMusiques];
-  //     arrayPrevious.push(URL.createObjectURL(e.target.files[0]));
-  //     setPreviousMusiques(arrayPrevious);
-  //   }
-  // };
-
   return (
     <div className='containerFiles'>
       <div className='title'>
@@ -47,7 +18,7 @@ const InputFiles = ({
       <div className='containerInput'>
         <label>{label}</label>
         <div className='button-wrapper'>
-          <span className='label'>ajouté un fichier</span>
+          <span className='label'>ajouter un fichier</span>
           <input
             type='file'
             multiple
