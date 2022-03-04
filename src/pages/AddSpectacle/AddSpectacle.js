@@ -1,20 +1,14 @@
-import "./spectacle.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { fab } from "@fortawesome/free-brands-svg-icons";
-import { faUser } from "@fortawesome/free-solid-svg-icons";
-import InputSmallText from "../../components/inputSmallText/InputSmallText";
-import InputLargeText from "../../components/inputLargeText/InputLargeText";
+import axios from "axios";
+import { useState } from "react";
 import Btn from "../../components/btn/Btn";
 import InputFiles from "../../components/inputFiles/InputFiles";
+import InputLargeText from "../../components/inputLargeText/InputLargeText";
+import InputSmallText from "../../components/inputSmallText/InputSmallText";
 import InputVideo from "../../components/inputVideo/InputVideo";
-import { useState } from "react";
-import axios from "axios";
-import InputDate from "../../components/inputDate/InputDate";
+import "./addspectacle.css";
 
-library.add(fab, faUser);
-
-const Spectacle = () => {
+const AddSpectacle = () => {
   //logique Files
   const [affiche, setAffiche] = useState();
   const [previousAffiche, setPreviousAffiche] = useState("");
@@ -97,7 +91,7 @@ const Spectacle = () => {
     formData.append("achat", boxSong);
     formData.append("affiche", affiche);
     formData.append("imgXL", imgXL);
-    formData.append("video", videos);
+    // formData.append("video", videos);
     formData.append("date", allDate);
 
     let i = 0;
@@ -108,9 +102,10 @@ const Spectacle = () => {
 
     const response = await axios.post(
       "http://localhost:3100/spectacle/publication",
+      // "https://lbaz.herokuapp.com/spectacle/publication",
       formData
     );
-    console.log(response);
+    console.log(response.data);
   };
 
   return (
@@ -211,15 +206,10 @@ const Spectacle = () => {
             setUrl={setUrl}
             videos={videos}
           />
-          <InputDate
-            allDate={allDate}
-            handleClick={handleClick}
-            handleDate={handleDate}
-          />
         </div>
       </form>
     </div>
   );
 };
 
-export default Spectacle;
+export default AddSpectacle;

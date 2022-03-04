@@ -7,7 +7,7 @@
   color: var(--black);
 }
 
-button {
+.btnCustom button {
   cursor: pointer;
   padding: 10px 8px;
   border-radius: 10px;

@@ -16,7 +16,7 @@ const InputFiles = ({
         <p>{title}</p>
       </div>
       <div className='containerInput'>
-        <label>{label}</label>
+        <label className='label'>{label}</label>
         <div className='button-wrapper'>
           <span className='label'>ajouter un fichier</span>
           <input

@@ -1,8 +1,3 @@
-import "./header.css";
-import { Link } from "react-router-dom";
-import logo from "../../asset/logo_boitazik.png";
-import burger from "../../asset/burger.png";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fab } from "@fortawesome/free-brands-svg-icons";
 import {
@@ -11,7 +6,12 @@ import {
   faGlasses,
   faNewspaper,
 } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import burger from "../../asset/burger.png";
+import logo from "../../asset/logo_boitazik.png";
+import "./header.css";
 
 library.add(fab, faCheckSquare, faGlasses, faNewspaper, faCalendarAlt);
 
@@ -38,7 +38,7 @@ const Header = () => {
         </div>
       </div>
       <nav>
-        <Link to='/spectacle'>
+        <Link to='/spectacles'>
           <div className='lienNavigation'>
             <div className='logoNav'>
               <FontAwesomeIcon
@@ -90,7 +90,7 @@ const Header = () => {
       <nav>
         <div className='lienNavigation'>
           <div className='containerLien'>
-            <Link to='/spectacle'>
+            <Link to='/spectacles'>
               <FontAwesomeIcon
                 icon='glasses'
                 color='white'
