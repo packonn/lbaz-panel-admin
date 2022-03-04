@@ -2,10 +2,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import { useState } from "react";
 import Btn from "../../components/btn/Btn";
+import Header from "../../components/header/Header";
 import InputFiles from "../../components/inputFiles/InputFiles";
 import InputLargeText from "../../components/inputLargeText/InputLargeText";
 import InputSmallText from "../../components/inputSmallText/InputSmallText";
 import InputVideo from "../../components/inputVideo/InputVideo";
+import { api } from "../../request/constant";
 import "./addspectacle.css";
 
 const AddSpectacle = () => {
@@ -100,31 +102,15 @@ const AddSpectacle = () => {
       formData.append("audio" + i, file);
     });
 
-    const response = await axios.post(
-      "http://localhost:3100/spectacle/publication",
-      // "https://lbaz.herokuapp.com/spectacle/publication",
-      formData
-    );
+    const response = await axios.post(`${api}spectacle/publication`, formData);
+    alert("response", response.data);
     console.log(response.data);
   };
 
   return (
     <div className='containerPage'>
-      <header>
-        <h2>Ajout d'un spectacle</h2>
-        <div className='admin'>
-          <div>
-            <FontAwesomeIcon
-              icon='user'
-              color='white'
-              style={{ height: "auto", width: "1.3vw" }}
-            />
-          </div>
-          <div className='textAdmin'>
-            <p>Admin</p>
-          </div>
-        </div>
-      </header>
+      <Header title={"Ajout d'un spectacle"} />
+
       <form
         onSubmit={(e) => handleSubmit(e)}
         onKeyPress={(e) => {
