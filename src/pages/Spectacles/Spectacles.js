@@ -3,12 +3,23 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Btn from "../../components/btn/Btn";
+import OptionDots from "../../components/optionDots/OptionDots";
 import { api } from "../../request/constant";
 import "./spectacle.css";
 
 const Spectacles = () => {
   const [allSpectacles, setAllSpectacle] = useState([]);
-  const [toggleOption, setToggleOption] = useState(false);
+  const [display, setDisplay] = useState();
+
+  const handleDisplay = (id) => {
+    console.log(1);
+    if (id === display || !id) {
+      setDisplay("");
+    } else {
+      setDisplay(id);
+    }
+  };
+
   const fetchSpectacles = async () => {
     const result = await axios.get(`${api}spectacles`);
     setAllSpectacle(result.data);
@@ -38,18 +49,16 @@ const Spectacles = () => {
             <div className='rowTabSpectacles' key={spectacle._id}>
               <p>{spectacle.nom}</p>
               <p>{spectacle.minDescription}</p>
-              <span>...</span>
+              <span
+                onClick={() => {
+                  handleDisplay(spectacle._id);
+                }}>
+                ...
+              </span>
+              {display === spectacle._id && <OptionDots />}
             </div>
           );
         })}
-      </div>
-      <div className='toggleOption'>
-        <div className='edit'>
-          <button>Éditer</button>
-        </div>
-        <div className='delete'>
-          <button>Supprimer</button>
-        </div>
       </div>
     </div>
   );
