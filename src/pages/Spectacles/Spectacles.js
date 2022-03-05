@@ -3,13 +3,14 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Btn from "../../components/btn/Btn";
+import { api } from "../../request/constant";
 import "./spectacle.css";
 
 const Spectacles = () => {
   const [allSpectacles, setAllSpectacle] = useState([]);
   const [toggleOption, setToggleOption] = useState(false);
   const fetchSpectacles = async () => {
-    const result = await axios.get("http://localhost:3100/spectacles");
+    const result = await axios.get(`${api}spectacles`);
     setAllSpectacle(result.data);
   };
   useEffect(() => {
@@ -22,7 +23,7 @@ const Spectacles = () => {
           <FontAwesomeIcon icon='search' color='white' className='loupe' />
           <input className='inputSpectacles' />
         </div>
-        <Link to='/spectacles/add'>
+        <Link to='/spectacles/ajout'>
           <Btn txt={"Ajouter un spectacles"} color='gris' />
         </Link>
       </div>
