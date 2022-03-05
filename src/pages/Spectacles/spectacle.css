@@ -50,6 +50,7 @@
 }
 
 .rowTabSpectacles {
+  position: relative;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -58,13 +59,13 @@
   text-align: center;
   border-bottom: 1px solid rgb(110, 108, 108);
 }
-.rowTabSpectacles :nth-child(1) {
+.rowTabSpectacles p:nth-child(1) {
   width: 20%;
 }
-.rowTabSpectacles :nth-child(2) {
+.rowTabSpectacles p:nth-child(2) {
   width: 70%;
 }
-.rowTabSpectacles :nth-child(3) {
+.rowTabSpectacles span:nth-child(3) {
   width: 10%;
 }
 .rowTabSpectacles span {
@@ -72,28 +73,4 @@
   font-size: 50px;
   margin-bottom: 20px;
   cursor: pointer;
-}
-/* toggle */
-
-.toggleOption {
-  display: flex;
-  flex-direction: column;
-  width: 100px;
-  border-radius: 0;
-  position: absolute;
-}
-.edit,
-.delete {
-  position: relative;
-  height: 50px;
-}
-.edit button,
-.delete button {
-  width: 100%;
-  height: 100%;
-  font-weight: bold;
-}
-.edit button:hover,
-.delete button:hover {
-  background: rgba(96, 105, 146, 0.5);
 }
