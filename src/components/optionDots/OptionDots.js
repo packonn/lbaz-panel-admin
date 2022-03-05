@@ -1,13 +1,20 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link } from "react-router-dom";
 import "./optiondots.css";
 
-const OptionDots = () => {
+const OptionDots = ({ handleDisplay, id }) => {
   return (
     <div className='toggleOption'>
-      <div className='edit'>
-        <button>Éditer</button>
-      </div>
+      <Link to={`/modif/spectacle/${id}`}>
+        <div className='edit'>
+          <button>Éditer</button>
+        </div>
+      </Link>
       <div className='delete'>
         <button>Supprimer</button>
+      </div>
+      <div className='close' onClick={() => handleDisplay()}>
+        <FontAwesomeIcon icon='times' color='white' />
       </div>
     </div>
   );

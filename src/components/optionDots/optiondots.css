@@ -8,6 +8,8 @@
   position: absolute;
   right: 100px;
   z-index: 10;
+  box-shadow: 0px 1px 5px 1px rgba(0, 0, 0, 0.52);
+  border-radius: 10px;
 }
 .edit,
 .delete {
@@ -19,8 +21,32 @@
   height: 30px;
   font-weight: bold;
   cursor: pointer;
+  border: none;
+  background: #fff;
+}
+
+.delete button {
+  border-radius: 0 0 10px 10px;
+}
+.edit button {
+  border-radius: 10px 10px 0 0;
+  border-bottom: 1px solid rgba(110, 108, 108, 0.534);
 }
 .edit button:hover,
 .delete button:hover {
   background: rgba(96, 105, 146, 0.5);
+}
+.close {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--bg-violet-clair);
+  cursor: pointer;
+  position: absolute;
+  right: -15px;
+  top: 5px;
+  transform: translate(-50%, -50%);
 }

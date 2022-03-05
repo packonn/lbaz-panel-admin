@@ -1,5 +1,7 @@
+// import './modifspectacle.css'
 import axios from "axios";
 import { useState } from "react";
+import { useParams } from "react-router-dom";
 import Btn from "../../components/btn/Btn";
 import Header from "../../components/Header/Header";
 import InputFiles from "../../components/inputFiles/InputFiles";
@@ -7,9 +9,10 @@ import InputLargeText from "../../components/inputLargeText/InputLargeText";
 import InputSmallText from "../../components/inputSmallText/InputSmallText";
 import InputVideo from "../../components/inputVideo/InputVideo";
 import { api } from "../../request/constant";
-import "./addspectacle.css";
+const ModifSpectacle = () => {
+  const { id } = useParams();
+  console.log(id);
 
-const AddSpectacle = () => {
   //logique Files
   const [affiche, setAffiche] = useState();
   const [previousAffiche, setPreviousAffiche] = useState("");
@@ -67,19 +70,7 @@ const AddSpectacle = () => {
   const [histoire, setHistoire] = useState("");
   const [mes, setMes] = useState("");
   const [noteAuteur, setNoteAuteur] = useState("");
-  // Logique date
-  const [date, setDate] = useState("");
-  const [allDate, setAllDate] = useState([]);
-  const handleClick = () => {
-    if (date !== "") {
-      const newArray = [...allDate];
-      newArray.push(date);
-      setAllDate(newArray);
-    }
-  };
-  const handleDate = (e) => {
-    setDate(e.target.value);
-  };
+
   // Envoie du formulaire
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -93,7 +84,6 @@ const AddSpectacle = () => {
     formData.append("affiche", affiche);
     formData.append("imgXL", imgXL);
     // formData.append("video", videos);
-    formData.append("date", allDate);
 
     let i = 0;
     musiques.forEach((file) => {
@@ -105,10 +95,9 @@ const AddSpectacle = () => {
     alert("response", response.data);
     console.log(response.data);
   };
-
   return (
     <div className='containerPage'>
-      <Header title={"Ajout d'un spectacle"} />
+      <Header title={"Modification du spectacle"} />
 
       <form
         onSubmit={(e) => handleSubmit(e)}
@@ -197,4 +186,4 @@ const AddSpectacle = () => {
   );
 };
 
-export default AddSpectacle;
+export default ModifSpectacle;
