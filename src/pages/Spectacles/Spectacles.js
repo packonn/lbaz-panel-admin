@@ -28,7 +28,7 @@ const Spectacles = () => {
           <Btn txt={"Ajouter un spectacles"} color='gris' />
         </Link>
       </div>
-      <List list={allSpectacles} />
+      <List list={allSpectacles} reload={fetchSpectacles} />
     </div>
   );
 };

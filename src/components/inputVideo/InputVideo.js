@@ -1,6 +1,6 @@
 import "./inputVideo.css";
 
-const InputVideo = ({ url, handleVideo, setUrl, videos }) => {
+const InputVideo = ({ setVideos, videos }) => {
   return (
     <div className='containerFiles'>
       <div className='title'>
@@ -12,34 +12,9 @@ const InputVideo = ({ url, handleVideo, setUrl, videos }) => {
           name='lien'
           placeholder="Copier l'URL de la vidéo"
           id='uploadVideo'
-          value={url}
-          onChange={(e) => setUrl(e.target.value)}
+          value={videos}
+          onChange={(e) => setVideos(e.target.value)}
         />
-        <div className='button-wrapper'>
-          <span
-            className='label'
-            onClick={() => {
-              if (url !== "") {
-                handleVideo();
-              }
-            }}>
-            ajouter le lien
-          </span>
-        </div>
-      </div>
-      <div className='previous'>
-        {videos.map((e, i) => {
-          e.slice(0, 12);
-          return (
-            <p
-              key={i}
-              className={
-                videos.length > 1 ? "previousVideos dashed" : "previousVideos "
-              }>
-              {e.slice(0, 40)}
-            </p>
-          );
-        })}
       </div>
     </div>
   );

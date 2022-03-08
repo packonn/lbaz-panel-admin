@@ -18,7 +18,7 @@ const AddSpectacle = () => {
   const [previousImgXL, setPreviousImgXL] = useState("");
 
   const [musiques, setMusiques] = useState([]);
-  const [previousMusiques, setPreviousMusiques] = useState([]);
+  // const [previousMusiques, setPreviousMusiques] = useState([]);
 
   const handleFiles = (e, name) => {
     if (name === "affiche") {
@@ -41,25 +41,18 @@ const AddSpectacle = () => {
       let numberFiles = e.target.files.length;
 
       const newArray = [...musiques];
-      let arrayPrevious = [...previousMusiques];
+      // let arrayPrevious = [...previousMusiques];
       for (let i = 0; i < numberFiles; i++) {
         newArray.push(e.target.files[i]);
-        arrayPrevious.push(URL.createObjectURL(e.target.files[i]));
+        // arrayPrevious.push(URL.createObjectURL(e.target.files[i]));
       }
       setMusiques(newArray);
-      setPreviousMusiques(arrayPrevious);
+      // setPreviousMusiques(arrayPrevious);
     }
   };
   // logique video YT
-  const [url, setUrl] = useState("");
-  const [videos, setVideos] = useState([]);
+  const [videos, setVideos] = useState("");
 
-  const handleVideo = () => {
-    const newArray = [...videos];
-    newArray.push(url);
-    setVideos(newArray);
-    setUrl("");
-  };
   // logique text input
   const [title, setTitle] = useState("");
   const [minDescription, setMinDescription] = useState("");
@@ -67,19 +60,7 @@ const AddSpectacle = () => {
   const [histoire, setHistoire] = useState("");
   const [mes, setMes] = useState("");
   const [noteAuteur, setNoteAuteur] = useState("");
-  // Logique date
-  const [date, setDate] = useState("");
-  const [allDate, setAllDate] = useState([]);
-  const handleClick = () => {
-    if (date !== "") {
-      const newArray = [...allDate];
-      newArray.push(date);
-      setAllDate(newArray);
-    }
-  };
-  const handleDate = (e) => {
-    setDate(e.target.value);
-  };
+
   // Envoie du formulaire
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -92,8 +73,7 @@ const AddSpectacle = () => {
     formData.append("achat", boxSong);
     formData.append("affiche", affiche);
     formData.append("imgXL", imgXL);
-    // formData.append("video", videos);
-    formData.append("date", allDate);
+    formData.append("video", videos);
 
     let i = 0;
     musiques.forEach((file) => {
@@ -104,6 +84,20 @@ const AddSpectacle = () => {
     const response = await axios.post(`${api}spectacle/publication`, formData);
     alert("response", response.data);
     console.log(response.data);
+    if (response.status === 200) {
+      setAffiche("");
+      setImgXL("");
+      setTitle("");
+      setMinDescription("");
+      setBoxSong("");
+      setHistoire("");
+      setMes("");
+      setNoteAuteur("");
+      setMusiques([]);
+      setPreviousAffiche("");
+      setPreviousImgXL("");
+      setVideos("");
+    }
   };
 
   return (
@@ -178,19 +172,14 @@ const AddSpectacle = () => {
             title={"Image"}
           />
           <InputFiles
-            previousMusiques={previousMusiques}
+            // previousMusiques={previousMusiques}
             musiques={musiques}
             handleFiles={handleFiles}
             name={"musiques"}
             label={"Musique du spectacle"}
             title={"Musiques"}
           />
-          <InputVideo
-            handleVideo={handleVideo}
-            url={url}
-            setUrl={setUrl}
-            videos={videos}
-          />
+          <InputVideo setVideos={setVideos} videos={videos} />
         </div>
       </form>
     </div>

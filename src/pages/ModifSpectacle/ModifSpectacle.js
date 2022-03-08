@@ -1,6 +1,6 @@
 // import './modifspectacle.css'
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Btn from "../../components/btn/Btn";
 import Header from "../../components/Header/Header";
@@ -11,8 +11,16 @@ import InputVideo from "../../components/inputVideo/InputVideo";
 import { api } from "../../request/constant";
 const ModifSpectacle = () => {
   const { id } = useParams();
-  console.log(id);
+  const [isLoading, setLoading] = useState(true);
 
+  const [spectacle, setSpectacle] = useState();
+  // logique text input
+  const [title, setTitle] = useState("");
+  const [minDescription, setMinDescription] = useState("");
+  const [boxSong, setBoxSong] = useState("");
+  const [histoire, setHistoire] = useState("");
+  const [mes, setMes] = useState("");
+  const [noteAuteur, setNoteAuteur] = useState("");
   //logique Files
   const [affiche, setAffiche] = useState();
   const [previousAffiche, setPreviousAffiche] = useState("");
@@ -21,7 +29,7 @@ const ModifSpectacle = () => {
   const [previousImgXL, setPreviousImgXL] = useState("");
 
   const [musiques, setMusiques] = useState([]);
-  const [previousMusiques, setPreviousMusiques] = useState([]);
+  const [newMusique, setNewMusique] = useState([]);
 
   const handleFiles = (e, name) => {
     if (name === "affiche") {
@@ -43,33 +51,45 @@ const ModifSpectacle = () => {
     if (name === "musiques") {
       let numberFiles = e.target.files.length;
 
-      const newArray = [...musiques];
-      let arrayPrevious = [...previousMusiques];
+      const newArray = [...newMusique];
       for (let i = 0; i < numberFiles; i++) {
         newArray.push(e.target.files[i]);
-        arrayPrevious.push(URL.createObjectURL(e.target.files[i]));
       }
-      setMusiques(newArray);
-      setPreviousMusiques(arrayPrevious);
+      console.log(newArray);
+      setNewMusique(newArray);
     }
   };
   // logique video YT
-  const [url, setUrl] = useState("");
   const [videos, setVideos] = useState([]);
 
-  const handleVideo = () => {
-    const newArray = [...videos];
-    newArray.push(url);
-    setVideos(newArray);
-    setUrl("");
+  // Réception du spectacle
+  const fetchSpectacle = async () => {
+    const result = await axios.get(`${api}spectacle/${id}`);
+    setSpectacle(result.data);
+    const tabMusiques = [...result.data.musique];
+    setTitle(result.data.nom);
+    setMinDescription(result.data.minDescription);
+    setHistoire(result.data.histoire);
+    setMes(result.data.mise_en_scene);
+    setBoxSong(result.data.achat);
+    setNoteAuteur(result.data.note_des_auteurs);
+    setVideos(result.data.video);
+    setMusiques(tabMusiques);
+    setLoading(false);
+    if (result.data.affiche) {
+      setPreviousAffiche(result.data.affiche.secure_url);
+    } else {
+      setPreviousAffiche("");
+    }
+    if (result.data.imgXL) {
+      setPreviousImgXL(result.data.imgXL.secure_url);
+    } else {
+      setPreviousImgXL("");
+    }
   };
-  // logique text input
-  const [title, setTitle] = useState("");
-  const [minDescription, setMinDescription] = useState("");
-  const [boxSong, setBoxSong] = useState("");
-  const [histoire, setHistoire] = useState("");
-  const [mes, setMes] = useState("");
-  const [noteAuteur, setNoteAuteur] = useState("");
+  useEffect(() => {
+    fetchSpectacle();
+  }, []);
 
   // Envoie du formulaire
   const handleSubmit = async (e) => {
@@ -83,22 +103,24 @@ const ModifSpectacle = () => {
     formData.append("achat", boxSong);
     formData.append("affiche", affiche);
     formData.append("imgXL", imgXL);
-    // formData.append("video", videos);
-
+    formData.append("video", videos);
     let i = 0;
-    musiques.forEach((file) => {
+    newMusique.forEach((file) => {
       i++;
       formData.append("audio" + i, file);
     });
-
-    const response = await axios.post(`${api}spectacle/publication`, formData);
-    alert("response", response.data);
-    console.log(response.data);
+    await axios
+      .post(`${api}spectacle/update/${id}`, formData)
+      .then((response) => {
+        alert("response", response.status);
+        console.log(response.data);
+        fetchSpectacle();
+      });
   };
-  return (
+
+  return !isLoading ? (
     <div className='containerPage'>
       <Header title={"Modification du spectacle"} />
-
       <form
         onSubmit={(e) => handleSubmit(e)}
         onKeyPress={(e) => {
@@ -149,40 +171,47 @@ const ModifSpectacle = () => {
             placeholder={"Lien vers BoxSongs"}
             max={100}
           />
-          <Btn txt={"Ajouter le spectacle"} color={"gris"} type={"submit"} />
+          <Btn txt={"Modifier le spectacle"} color={"gris"} type={"submit"} />
         </div>
         <div className='sideRight'>
           <InputFiles
+            spectacle={spectacle}
+            affiche={affiche}
             previousAffiche={previousAffiche}
             handleFiles={handleFiles}
             name={"affiche"}
             label={"Affiche du spectacle"}
             title={"Affiche"}
+            setPreviousAffiche={setPreviousAffiche}
+            id={id}
           />
           <InputFiles
-            previousImgXL={previousImgXL}
+            spectacle={spectacle}
             handleFiles={handleFiles}
+            previousImgXL={previousImgXL}
             name={"imgXL"}
             label={"Photo du spectacle"}
             title={"Image"}
+            setPreviousImgXL={setPreviousImgXL}
+            id={id}
           />
           <InputFiles
-            previousMusiques={previousMusiques}
+            setNewMusique={setNewMusique}
+            setMusiques={setMusiques}
+            id={id}
+            newMusique={newMusique}
             musiques={musiques}
             handleFiles={handleFiles}
             name={"musiques"}
             label={"Musique du spectacle"}
             title={"Musiques"}
           />
-          <InputVideo
-            handleVideo={handleVideo}
-            url={url}
-            setUrl={setUrl}
-            videos={videos}
-          />
+          <InputVideo setVideos={setVideos} videos={videos} />
         </div>
       </form>
     </div>
+  ) : (
+    <p>en attente</p>
   );
 };
 

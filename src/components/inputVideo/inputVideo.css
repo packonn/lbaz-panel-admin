@@ -1,7 +1,7 @@
 /* css fait dans input files */
 #uploadVideo {
   margin-right: 20px;
-  width: calc(100% - 140px);
+  width: 100%;
   font-size: 12px;
 }
 .previousVideos {

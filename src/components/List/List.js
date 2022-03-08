@@ -2,7 +2,7 @@ import { useState } from "react";
 import OptionDots from "../optionDots/OptionDots";
 import "./list.css";
 
-const List = ({ list }) => {
+const List = ({ list, reload }) => {
   const [display, setDisplay] = useState();
 
   const handleDisplay = (id) => {
@@ -31,7 +31,11 @@ const List = ({ list }) => {
               ...
             </span>
             {display === spectacle._id && (
-              <OptionDots handleDisplay={handleDisplay} id={spectacle._id} />
+              <OptionDots
+                handleDisplay={handleDisplay}
+                id={spectacle._id}
+                reload={reload}
+              />
             )}
           </div>
         );
