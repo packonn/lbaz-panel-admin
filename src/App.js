@@ -1,5 +1,6 @@
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fab } from "@fortawesome/free-brands-svg-icons";
+
 import { faSearch, faTimes, faUser } from "@fortawesome/free-solid-svg-icons";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";

@@ -6,20 +6,37 @@ import InputDateTime from "../../../components/inputDateTime/inputDateTime";
 import InputSmallText from "../../../components/inputSmallText/InputSmallText";
 import IsLoading from "../../../components/IsLoading/IsLoading";
 import { api } from "../../../request/constant";
+
 import { getAllSpectacle } from "../../../request/spectacle";
 import "./addEvent.css";
+
+import AlertCustom from "../../../components/alertCustom/AlertCustom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 
 const AddEvent = () => {
   // logique text input
   const [isLoading, setIsLoading] = useState(true);
+  const [alert, setAlert] = useState({ type: "none", msg: "" });
   const [allSpectacle, setAllSpectacle] = useState([]);
   const [spectacleSelected, setSpectacleIdSelected] = useState("");
   const [adresse, setAdresse] = useState("");
   const [date, setDate] = useState("");
+  const optionNotify = {
+    position: "bottom-right",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+  };
 
   const getSpectacleForSelect = async () => {
+    // Récupération de tous les spectacles, pour les ajouter dans le select
     const allSpectacle = await getAllSpectacle();
-    console.log("allSpectacle", allSpectacle);
+    console.log("allSPectacle", allSpectacle);
     setAllSpectacle(allSpectacle);
   };
 
@@ -32,38 +49,52 @@ const AddEvent = () => {
   // Envoie du formulaire
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("spectacleSelected", spectacleSelected);
     const formData = new FormData();
-    // formData.append("spectacle_id", spectacleSelected);
     formData.append("date", date);
     formData.append("adresse", adresse);
-    console.log("'formData avant'", formData);
-
-    // const response = await postEvent(formData, spectacleSelected);
-    const response = await axios.post(
-      `${api}evenement/publication/${spectacleSelected}`,
-      formData
-    );
-    // } else {
-    //    message erreur
-    // }
+    if (spectacleSelected && date && adresse) {
+      setIsLoading(true);
+      const response = await axios.post(
+        `${api}evenement/publication/${spectacleSelected}`,
+        formData
+      );
+      if (response.status === 200) {
+        setIsLoading(false);
+        console.log("success");
+        notify("success", "Événement ajouté avec succès !");
+      } else {
+        setIsLoading(false);
+        notify("error", "Une erreur est survenue !");
+      }
+    } else {
+      notify(
+        "warning",
+        "Vous devez remplir tous les champs pour ajouter un événement"
+      );
+    }
   };
 
   const handleSelect = (e) => {
+    // Selection du spectacle
     setSpectacleIdSelected(e.target.value);
-    console.log("Value selected", e.target.value);
   };
   const onChangeDateTime = (value) => {
-    console.log("Value datetime", value);
+    // Selection de la date et l'heure
     setDate(value);
   };
 
-  return isLoading ? (
-    <IsLoading />
-  ) : (
-    <div className='containerPage'>
-      <Header title={"Ajout d'un événement"} />
+  const notify = (type, text) => {
+    console.log("type et text", type, text);
+    toast[type](text, optionNotify);
+  };
 
+  return (
+    <div className='containerPage'>
+      {isLoading && <IsLoading />}
+      <div>
+        <ToastContainer />
+      </div>
+      <Header title={"Ajout d'un événement"} />
       <form
         onSubmit={(e) => handleSubmit(e)}
         onKeyPress={(e) => {
@@ -71,11 +102,6 @@ const AddEvent = () => {
         }}>
         <div className='sideLeft'>
           <div className='inputAdress'>
-            {/* <FontAwesomeIcon
-              icon='user'
-              color='white'
-              style={{ height: "auto", width: "1.3vw" }}
-            /> */}
             <InputSmallText
               text={adresse}
               setText={setAdresse}
@@ -84,13 +110,27 @@ const AddEvent = () => {
               placeholder={"Adresse de l'événement"}
             />
           </div>
-          <InputDateTime onChange={onChangeDateTime} />
+          <div className='inputMarge'>
+            <InputDateTime onChange={onChangeDateTime} />
+          </div>
 
-          <select name='select' onChange={handleSelect}>
+          <select
+            className='inputMarge'
+            name='select'
+            defaultValue={""}
+            onChange={handleSelect}>
+            <option value='' selected disabled>
+              Sélectionnez un spectacle
+            </option>
             {allSpectacle.map((spectacle) => {
-              return <option value={spectacle._id}>{spectacle.nom}</option>;
+              return (
+                <option key={spectacle._id} value={spectacle._id}>
+                  {spectacle.nom}
+                </option>
+              );
             })}
           </select>
+
           <Btn txt={"Ajouter l'événement"} color={"gris"} type={"submit"} />
         </div>
         <div className='sideRight'></div>
