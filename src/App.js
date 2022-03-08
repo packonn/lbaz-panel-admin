@@ -1,6 +1,6 @@
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fab } from "@fortawesome/free-brands-svg-icons";
-import { faSearch, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faSearch, faUser, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Nav from "./components/Nav/Nav";
@@ -12,7 +12,7 @@ import Home from "./pages/Home/Home";
 import Spectacles from "./pages/Spectacles/Spectacles";
 
 function App() {
-  library.add(fab, faUser, faSearch);
+  library.add(fab, faUser, faSearch, faTimes);
 
   return (
     <div className='App'>
