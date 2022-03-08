@@ -3,22 +3,12 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Btn from "../../components/btn/Btn";
-import OptionDots from "../../components/optionDots/OptionDots";
+import List from "../../components/List/List";
 import { api } from "../../request/constant";
 import "./spectacle.css";
 
 const Spectacles = () => {
   const [allSpectacles, setAllSpectacle] = useState([]);
-  const [display, setDisplay] = useState();
-
-  const handleDisplay = (id) => {
-    console.log(1);
-    if (id === display || !id) {
-      setDisplay("");
-    } else {
-      setDisplay(id);
-    }
-  };
 
   const fetchSpectacles = async () => {
     const result = await axios.get(`${api}spectacles`);
@@ -38,28 +28,7 @@ const Spectacles = () => {
           <Btn txt={"Ajouter un spectacles"} color='gris' />
         </Link>
       </div>
-      <div className='containerSpectacles'>
-        <div className='headerTabSpectacles'>
-          <p>Titre</p>
-          <p>Min-description</p>
-          <p>Option</p>
-        </div>
-        {allSpectacles.map((spectacle) => {
-          return (
-            <div className='rowTabSpectacles' key={spectacle._id}>
-              <p>{spectacle.nom}</p>
-              <p>{spectacle.minDescription}</p>
-              <span
-                onClick={() => {
-                  handleDisplay(spectacle._id);
-                }}>
-                ...
-              </span>
-              {display === spectacle._id && <OptionDots />}
-            </div>
-          );
-        })}
-      </div>
+      <List list={allSpectacles} reload={fetchSpectacles} />
     </div>
   );
 };

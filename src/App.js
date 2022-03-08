@@ -1,6 +1,7 @@
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fab } from "@fortawesome/free-brands-svg-icons";
-import { faSearch, faUser, faTimes } from "@fortawesome/free-solid-svg-icons";
+
+import { faSearch, faTimes, faUser } from "@fortawesome/free-solid-svg-icons";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Nav from "./components/Nav/Nav";
@@ -9,6 +10,7 @@ import AddSpectacle from "./pages/AddSpectacle/AddSpectacle";
 import AddEvent from "./pages/Agenda/AddEvent/AddEvent";
 import Agenda from "./pages/Agenda/Agenda";
 import Home from "./pages/Home/Home";
+import ModifSpectacle from "./pages/ModifSpectacle/ModifSpectacle";
 import Spectacles from "./pages/Spectacles/Spectacles";
 
 function App() {
@@ -24,6 +26,7 @@ function App() {
         <Route path='/agenda' element={<Agenda />} />
         <Route path='/agenda/ajout' element={<AddEvent />} />
         <Route path='/actualite' element={<Actualite />} />
+        <Route path='/modif/spectacle/:id' element={<ModifSpectacle />} />
       </Routes>
     </div>
   );

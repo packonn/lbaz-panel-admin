@@ -1,18 +1,19 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState, useEffect } from "react";
-import { postEvent } from "../../../request/agenda";
-import Btn from "../../../components/btn/Btn";
-import "./addEvent.css";
-import InputSmallText from "../../../components/inputSmallText/InputSmallText";
-import Header from "../../../components/header/Header";
-import IsLoading from "../../../components/IsLoading/IsLoading";
-import { getAllSpectacle } from "../../../request/spectacle";
-import InputDateTime from "../../../components/inputDateTime/inputDateTime";
 import axios from "axios";
+import { useEffect, useState } from "react";
+import Btn from "../../../components/btn/Btn";
+import Header from "../../../components/Header/Header";
+import InputDateTime from "../../../components/inputDateTime/inputDateTime";
+import InputSmallText from "../../../components/inputSmallText/InputSmallText";
+import IsLoading from "../../../components/IsLoading/IsLoading";
 import { api } from "../../../request/constant";
+
+import { getAllSpectacle } from "../../../request/spectacle";
+import "./addEvent.css";
+
 import AlertCustom from "../../../components/alertCustom/AlertCustom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
 
 const AddEvent = () => {
   // logique text input

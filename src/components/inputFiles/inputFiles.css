@@ -74,3 +74,25 @@
 .dashed {
   border-bottom: grey solid 1px;
 }
+.line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+.deleteImg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  right: -10px;
+  top: -10px;
+  background-color: red;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}
+.imgPrevious {
+  width: 200px;
+  position: relative;
+}
