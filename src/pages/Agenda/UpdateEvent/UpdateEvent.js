@@ -1,23 +1,24 @@
 import { useState, useEffect } from "react";
-import { postEvent } from "../../../request/agenda";
+import { getOneEvent, postEvent, updateEvent } from "../../../request/agenda";
 import Btn from "../../../components/btn/Btn";
-import "./addEvent.css";
 import InputSmallText from "../../../components/inputSmallText/InputSmallText";
 import Header from "../../../components/header/Header";
 import IsLoading from "../../../components/IsLoading/IsLoading";
 import { getAllSpectacle } from "../../../request/spectacle";
 import InputDateTime from "../../../components/inputDateTime/inputDateTime";
 import { ToastContainer, toast } from "react-toastify";
+import { useParams } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 
-const AddEvent = () => {
+const UpdateEvent = () => {
   // logique text input
   const [isLoading, setIsLoading] = useState(true);
-  const [alert, setAlert] = useState({ type: "none", msg: "" });
+  const [event, setEvent] = useState({});
   const [allSpectacle, setAllSpectacle] = useState([]);
   const [spectacleSelected, setSpectacleIdSelected] = useState("");
   const [adresse, setAdresse] = useState("");
   const [date, setDate] = useState("");
+  const { id } = useParams();
   const optionNotify = {
     position: "bottom-right",
     autoClose: 5000,
@@ -29,16 +30,27 @@ const AddEvent = () => {
   };
 
   const getSpectacleForSelect = async () => {
-    // Récupération de tous les spectacles, pour les ajouter dans le select
+    // Récupération des infos de l'événement
     const allSpectacle = await getAllSpectacle();
     setAllSpectacle(allSpectacle);
   };
 
+  const getEvent = async () => {
+    // Récupération de tous les spectacles, pour les ajouter dans le select
+    const event = await getOneEvent(id);
+    setEvent(event);
+    setAdresse(event.adresse);
+    setDate(event.date);
+    setSpectacleIdSelected(event.spectacle._id);
+  };
+
   useEffect(() => {
     getSpectacleForSelect().then(() => {
-      setIsLoading(false);
+      getEvent().then(() => {
+        setIsLoading(false);
+      });
     });
-  }, []);
+  }, [id]);
 
   const handleSubmit = async (e) => {
     // Envoie du formulaire
@@ -48,10 +60,10 @@ const AddEvent = () => {
     formData.append("adresse", adresse);
     if (spectacleSelected && date && adresse) {
       setIsLoading(true);
-      const response = await postEvent(formData, spectacleSelected);
+      const response = await updateEvent(formData, event._id);
       if (response.status === 200) {
         setIsLoading(false);
-        notify("success", "Événement ajouté avec succès !");
+        notify("success", "Événement modifié avec succès !");
       } else {
         setIsLoading(false);
         notify("error", "Une erreur est survenue !");
@@ -77,7 +89,9 @@ const AddEvent = () => {
     toast[type](text, optionNotify);
   };
 
-  return (
+  return isLoading ? (
+    <IsLoading />
+  ) : (
     <div className='containerPage'>
       {isLoading && <IsLoading />}
       <div>
@@ -96,31 +110,29 @@ const AddEvent = () => {
               setText={setAdresse}
               type={"text"}
               name={"adresse"}
-              placeholder={"Adresse de l'événement"}
+              placeholder={event.adresse}
             />
           </div>
           <div className='inputMarge'>
-            <InputDateTime onChange={onChangeDateTime} />
+            <InputDateTime defaultValue={date} onChange={onChangeDateTime} />
           </div>
 
-          <select
-            className='inputMarge'
-            name='select'
-            defaultValue={""}
-            onChange={handleSelect}>
-            <option value='' selected disabled>
-              Sélectionnez un spectacle
-            </option>
+          <select className='inputMarge' name='select' onChange={handleSelect}>
             {allSpectacle.map((spectacle) => {
               return (
-                <option key={spectacle._id} value={spectacle._id}>
+                <option
+                  key={spectacle._id}
+                  selected={
+                    spectacle._id === event.spectacle._id ? true : false
+                  }
+                  value={spectacle._id}>
                   {spectacle.nom}
                 </option>
               );
             })}
           </select>
 
-          <Btn txt={"Ajouter l'événement"} color={"gris"} type={"submit"} />
+          <Btn txt={"Modifier l'événement"} color={"gris"} type={"submit"} />
         </div>
         <div className='sideRight'></div>
       </form>
@@ -128,4 +140,4 @@ const AddEvent = () => {
   );
 };
 
-export default AddEvent;
+export default UpdateEvent;

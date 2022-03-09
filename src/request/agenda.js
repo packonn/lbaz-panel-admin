@@ -5,7 +5,7 @@ export const getAllEvents = async () => {
   // Récupération de tous les événements
   try {
     const response = await axios.get(`${api}evenements`);
-    return response.data;
+    return response;
   } catch (error) {
     return null;
   }
@@ -35,15 +35,16 @@ export const postEvent = async (formData, id) => {
       `${api}evenement/publication/${id}`,
       formData
     );
-    return response.data;
+    return response;
   } catch (error) {
     return null;
   }
 };
-export const updateEvent = async (id, formData) => {
+export const updateEvent = async (formData, id) => {
+  console.log("formData", formData, id);
   // Modification d'un événement lié à un spectacle
   try {
-    const response = await axios.post(
+    const response = await axios.put(
       `${api}evenement/update/${id}`,
       formData
       //   {
@@ -53,7 +54,7 @@ export const updateEvent = async (id, formData) => {
       //     },
       //   }
     );
-    return response.data;
+    return response;
   } catch (error) {
     return null;
   }

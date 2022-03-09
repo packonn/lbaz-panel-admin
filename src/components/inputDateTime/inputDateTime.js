@@ -1,4 +1,4 @@
-const InputDateTime = ({ onChange }) => {
+const InputDateTime = ({ onChange, defaultValue }) => {
   const currentDay = () => {
     // renvoie le jour actuel
     return new Date().toISOString().slice(0, 16);
@@ -9,12 +9,12 @@ const InputDateTime = ({ onChange }) => {
     const today = new Date();
     let tomorrow = new Date();
     tomorrow.setDate(today.getDate() + 365 * 4);
-    console.log("tomorrow", tomorrow);
     return tomorrow.toISOString().slice(0, 16);
   };
 
   return (
     <input
+      defaultValue={defaultValue.slice(0, 16)}
       type='datetime-local'
       name='date'
       id='inputDate'
@@ -22,7 +22,6 @@ const InputDateTime = ({ onChange }) => {
       max={nextDay()}
       onChange={(e) => {
         onChange(e.target.value);
-        console.log(e.target.value);
       }}
     />
   );

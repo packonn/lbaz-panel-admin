@@ -12,7 +12,6 @@ const Spectacles = () => {
   const [display, setDisplay] = useState();
 
   const handleDisplay = (id) => {
-    console.log(1);
     if (id === display || !id) {
       setDisplay("");
     } else {
