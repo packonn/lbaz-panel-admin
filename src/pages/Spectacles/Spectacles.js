@@ -9,6 +9,16 @@ import "./spectacle.css";
 
 const Spectacles = () => {
   const [allSpectacles, setAllSpectacle] = useState([]);
+  //const [display, setDisplay] = useState();
+
+  //const handleDisplay = (id) => {
+   // if (id === display || !id) {
+     // setDisplay("");
+   // } else {
+     // setDisplay(id);
+   // }
+  //};
+
 
   const fetchSpectacles = async () => {
     const result = await axios.get(`${api}spectacles`);
