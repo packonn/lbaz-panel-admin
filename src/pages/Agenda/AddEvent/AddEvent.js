@@ -1,34 +1,18 @@
-
 import { useState, useEffect } from "react";
 import { postEvent } from "../../../request/agenda";
-
-import axios from "axios";
-import { useEffect, useState } from "react";
-
 import Btn from "../../../components/btn/Btn";
 import Header from "../../../components/Header/Header";
 import InputDateTime from "../../../components/inputDateTime/inputDateTime";
 import InputSmallText from "../../../components/inputSmallText/InputSmallText";
 import IsLoading from "../../../components/IsLoading/IsLoading";
-
-import { getAllSpectacle } from "../../../request/spectacle";
-import InputDateTime from "../../../components/inputDateTime/inputDateTime";
-
-import { api } from "../../../request/constant";
-
 import { getAllSpectacle } from "../../../request/spectacle";
 import "./addEvent.css";
-
-import AlertCustom from "../../../components/alertCustom/AlertCustom";
-
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
 
 const AddEvent = () => {
   // logique text input
   const [isLoading, setIsLoading] = useState(true);
-  const [alert, setAlert] = useState({ type: "none", msg: "" });
   const [allSpectacle, setAllSpectacle] = useState([]);
   const [spectacleSelected, setSpectacleIdSelected] = useState("");
   const [adresse, setAdresse] = useState("");

@@ -4,7 +4,7 @@ import { api } from "./constant";
 export const getAllEvents = async () => {
   // Récupération de tous les événements
   try {
-    const response = await axios.get(`${api}evenements`);
+    const response = await axios.get(`${api}agenda`);
     return response;
   } catch (error) {
     return null;
@@ -13,7 +13,7 @@ export const getAllEvents = async () => {
 export const getOneEvent = async (id) => {
   // Récupération d'un événement
   try {
-    const response = await axios.get(`${api}evenement/${id}`);
+    const response = await axios.get(`${api}agenda/${id}`);
     return response.data;
   } catch (error) {
     return null;
@@ -22,7 +22,7 @@ export const getOneEvent = async (id) => {
 export const getAllEventsOfSpectacle = async (id) => {
   // Récupération de tous les événements d'un spectacle
   try {
-    const response = await axios.get(`${api}evenement/filtre/spectacle/${id}`);
+    const response = await axios.get(`${api}agenda/filtre/spectacle/${id}`);
     return response.data;
   } catch (error) {
     return null;
@@ -32,7 +32,7 @@ export const postEvent = async (formData, id) => {
   // Publication d'un événement lié à un spectacle
   try {
     const response = await axios.post(
-      `${api}evenement/publication/${id}`,
+      `${api}agenda/publication/${id}`,
       formData
     );
     return response;
@@ -45,7 +45,7 @@ export const updateEvent = async (formData, id) => {
   // Modification d'un événement lié à un spectacle
   try {
     const response = await axios.put(
-      `${api}evenement/update/${id}`,
+      `${api}agenda/update/${id}`,
       formData
       //   {
       //     headers: {
@@ -63,7 +63,7 @@ export const updateEvent = async (formData, id) => {
 export const deleteEvent = async (id) => {
   // Suppression d'un événement lié à un spectacle
   try {
-    const response = await axios.delete(`${api}evenement/delete/${id}`);
+    const response = await axios.delete(`${api}agenda/delete/${id}`);
     return response.data;
   } catch (error) {
     return null;

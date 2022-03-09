@@ -7,6 +7,9 @@
   width: 20vw;
   background: var(--black);
 }
+.active {
+  background-color: var(--bg-violet-clair);
+}
 .menuXs {
   display: flex;
   flex-direction: column;

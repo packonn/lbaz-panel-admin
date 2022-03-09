@@ -8,7 +8,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import burger from "../../asset/burger.png";
 import logo from "../../asset/logo_boitazik.png";
 import "./Nav.css";
@@ -38,7 +38,7 @@ const Nav = () => {
         </div>
       </div>
       <nav>
-        <Link to='/spectacles'>
+        <NavLink activeClassName='active' to='/spectacles'>
           <div className='lienNavigation'>
             <div className='logoNav'>
               <FontAwesomeIcon
@@ -51,8 +51,8 @@ const Nav = () => {
               <span>Spectacle</span>
             </div>
           </div>
-        </Link>
-        <Link to='/actualite'>
+        </NavLink>
+        <NavLink activeClassName='active' to='/actualite'>
           <div className='lienNavigation'>
             <div className='logoNav'>
               <FontAwesomeIcon
@@ -65,8 +65,8 @@ const Nav = () => {
               <span>Actualité</span>
             </div>
           </div>
-        </Link>
-        <Link to='/agenda'>
+        </NavLink>
+        <NavLink to='/agenda' activeClassName='active'>
           <div className='lienNavigation'>
             <div className='logoNav'>
               <FontAwesomeIcon
@@ -79,7 +79,7 @@ const Nav = () => {
               <span>Agenda</span>
             </div>
           </div>
-        </Link>
+        </NavLink>
       </nav>
     </div>
   ) : (

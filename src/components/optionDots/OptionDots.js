@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 import { api } from "../../request/constant";
 import "./optiondots.css";
 
-const OptionDots = ({ handleDisplay, id, reload }) => {
+const OptionDots = ({ handleDisplay, id, reload, page }) => {
   return (
     <div className='toggleOption'>
-      <Link to={`/modif/spectacle/${id}`}>
+      <Link to={`/${page}/modifier/${id}`}>
         <div className='edit'>
           <button>Éditer</button>
         </div>
@@ -15,7 +15,7 @@ const OptionDots = ({ handleDisplay, id, reload }) => {
       <div
         className='delete'
         onClick={async () => {
-          await axios.delete(`${api}spectacle/delete/spectacle/${id}`);
+          await axios.delete(`${api}${page}/delete/${page}/${id}`);
           reload();
         }}>
         <button>Supprimer</button>

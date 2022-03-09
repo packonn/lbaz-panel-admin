@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import { getOneEvent, postEvent, updateEvent } from "../../../request/agenda";
+import { getOneEvent, updateEvent } from "../../../request/agenda";
 import Btn from "../../../components/btn/Btn";
 import InputSmallText from "../../../components/inputSmallText/InputSmallText";
-import Header from "../../../components/header/Header";
+import Header from "../../../components/Header/Header";
 import IsLoading from "../../../components/IsLoading/IsLoading";
 import { getAllSpectacle } from "../../../request/spectacle";
 import InputDateTime from "../../../components/inputDateTime/inputDateTime";

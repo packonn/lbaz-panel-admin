@@ -71,14 +71,21 @@ const InputFiles = ({
       <div className='containerInput'>
         <label className='label'>{label}</label>
         <div className='button-wrapper'>
-          <span className='label'>ajouter un fichier</span>
+          <span
+            className={
+              previousImgXL || previousAffiche
+                ? "labelSpan disabledInput"
+                : "labelSpan "
+            }>
+            ajouter un fichier
+          </span>
           <input
             type='file'
             multiple
             disabled={previousImgXL || previousAffiche ? true : false}
             name={name}
             id='upload'
-            className='upload-box'
+            className='preupload-box'
             onChange={(e) => handleFiles(e, name)}
           />
         </div>

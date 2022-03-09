@@ -14,4 +14,8 @@
   font-weight: bold;
   font-size: 15px;
   border: none;
+  cursor: pointer;
+}
+.btnCustom button:hover {
+  cursor: pointer;
 }
