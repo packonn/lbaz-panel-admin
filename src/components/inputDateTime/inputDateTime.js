@@ -14,7 +14,7 @@ const InputDateTime = ({ onChange, defaultValue }) => {
 
   return (
     <input
-      defaultValue={defaultValue.slice(0, 16)}
+      defaultValue={defaultValue ? defaultValue?.slice(0, 16) : null}
       type='datetime-local'
       name='date'
       id='inputDate'

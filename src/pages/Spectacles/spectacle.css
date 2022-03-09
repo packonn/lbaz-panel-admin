@@ -11,10 +11,11 @@
 .headerSpectacles .inputHeaderSpectacles .inputSpectacles {
   border: 1px solid white;
   background: transparent;
-  color: white;
+  color: black;
   outline: none;
   padding-left: 35px;
   border-radius: 20px;
+  background-color: white;
 }
 .inputHeaderSpectacles {
   position: relative;

@@ -3,6 +3,7 @@ import { fab } from "@fortawesome/free-brands-svg-icons";
 
 import { faSearch, faTimes, faUser } from "@fortawesome/free-solid-svg-icons";
 import { Route, Routes } from "react-router-dom";
+import { useState } from "react";
 import "./App.css";
 import Nav from "./components/Nav/Nav";
 import Actualite from "./pages/Actualite/Actualite";
@@ -16,19 +17,26 @@ import Spectacles from "./pages/Spectacles/Spectacles";
 
 function App() {
   library.add(fab, faUser, faSearch, faTimes);
+  const [search, setSearch] = useState("");
 
   return (
     <div className='App'>
       <Nav />
       <Routes>
         <Route path='/' element={<Home />} />
-        <Route path='/spectacles' element={<Spectacles />} />
+        <Route
+          path='/spectacles'
+          element={<Spectacles search={search} setSearch={setSearch} />}
+        />
         <Route path='/spectacles/ajout' element={<AddSpectacle />} />
-        <Route path='/agenda' element={<Agenda />} />
+        <Route path='/spectacle/modifier/:id' element={<ModifSpectacle />} />
+        <Route
+          path='/agenda'
+          element={<Agenda search={search} setSearch={setSearch} />}
+        />
         <Route path='/agenda/ajout' element={<AddEvent />} />
         <Route path='/agenda/modifier/:id' element={<UpdateEvent />} />
         <Route path='/actualite' element={<Actualite />} />
-        <Route path='/modif/spectacle/:id' element={<ModifSpectacle />} />
       </Routes>
     </div>
   );
