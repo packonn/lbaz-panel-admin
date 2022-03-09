@@ -1,15 +1,6 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./inputSmallText.css";
 
-const InputSmallText = ({
-  type,
-  name,
-  placeholder,
-  max,
-  text,
-  setText,
-  icon,
-}) => {
+const InputSmallText = ({ type, name, placeholder, max, text, setText }) => {
   return (
     <input
       className='inputSmall'
