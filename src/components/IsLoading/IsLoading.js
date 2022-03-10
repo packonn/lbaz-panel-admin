@@ -3,9 +3,9 @@ import { colors } from "../../colors";
 
 import "./isLoading.css";
 
-const IsLoading = () => {
+const IsLoading = ({ absolute }) => {
   return (
-    <div className='loading'>
+    <div className={absolute ? "loading absolute" : "loading"}>
       <TailSpin
         heigth='100'
         width='100'

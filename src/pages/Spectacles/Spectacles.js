@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { colors } from "../../colors";
 import Btn from "../../components/btn/Btn";
+import IsLoading from "../../components/IsLoading/IsLoading";
 import List from "../../components/List/List";
 import SearchBar from "../../components/searchBar/SearchBar";
 import { api } from "../../request/constant";
@@ -11,24 +12,20 @@ import "./spectacle.css";
 
 const Spectacles = ({ search, setSearch }) => {
   const [allSpectacles, setAllSpectacle] = useState([]);
-  //const [display, setDisplay] = useState();
-
-  //const handleDisplay = (id) => {
-  // if (id === display || !id) {
-  // setDisplay("");
-  // } else {
-  // setDisplay(id);
-  // }
-  //};
+  const [isLoading, setIsLoading] = useState(true);
 
   const fetchSpectacles = async () => {
     const result = await axios.get(`${api}spectacles`);
     setAllSpectacle(result.data);
   };
   useEffect(() => {
-    fetchSpectacles();
+    fetchSpectacles().then(() => {
+      setIsLoading(false);
+    });
   }, []);
-  return (
+  return isLoading ? (
+    <IsLoading />
+  ) : (
     <div className='containerPageSpectacles'>
       <div className='headerSpectacles'>
         <div className='inputHeaderSpectacles'>

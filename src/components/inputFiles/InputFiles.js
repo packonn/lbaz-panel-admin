@@ -1,9 +1,18 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
-import { api } from "../../request/constant";
+import { colors } from "../../colors";
+import {
+  api,
+  deleteDoublon,
+  deleteExtensionFile,
+  notify,
+  optionNotify,
+  sortMusic,
+} from "../../request/constant";
 import "./inputFiles.css";
 
 const InputFiles = ({
+  type,
   name,
   label,
   title,
@@ -19,41 +28,77 @@ const InputFiles = ({
   setPreviousImgXL,
   setPreviousAffiche,
 }) => {
-  const deleteItem = async (e, type) => {
+  const deleteItem = async (e, name) => {
     const formData = new FormData();
-    if (type === "musique") {
-      formData.append("musique", e.name);
-      formData.append("url", e.secure_url);
+    if (name === "musique") {
+      if (type === "ajout") {
+        const newTabMusiqueFiltered = musiques.filter(
+          (musique) => musique.name !== e.name
+        );
+        // Si nous sommes dans l'ajout d'un spectacle, on efface seulement visuellement la musique
+        setMusiques(newTabMusiqueFiltered);
+        // notify("success", `Musique supprimée`, optionNotify);
+      } else {
+        const newTabMusicUpdateFiltered = musiques.filter(
+          (musique) => musique.secure_url !== e.secure_url
+        );
 
-      const newTab = musiques.filter(
-        (musique) => musique.secure_url !== e.secure_url
-      );
-      await axios
-        .post(`${api}spectacle/delete/element/${id}`, formData)
-        .then((response) => {
-          console.log(response);
-          setMusiques(newTab);
-        });
+        formData.append("musique", e.name);
+        formData.append("url", e.secure_url);
+
+        await axios
+          .post(`${api}spectacle/delete/element/${id}`, formData)
+          .then((response) => {
+            if (response.status === 200) {
+              notify("success", `Musique :${e.name} supprimée`, optionNotify);
+              setMusiques(newTabMusicUpdateFiltered);
+            } else {
+              notify("error", `Une erreur est survenue`, optionNotify);
+            }
+          });
+      }
     }
-    if (type === "affiche") {
-      formData.append("image", e.affiche.name);
-      formData.append("url", e.affiche.secure_url);
-      await axios
-        .post(`${api}spectacle/delete/element/${id}`, formData)
-        .then((response) => {
-          console.log(response);
-          setPreviousAffiche("");
-        });
+    if (name === "affiche") {
+      if (type === "ajout") {
+        setPreviousAffiche("");
+        // notify("success", `Photo supprimée`, optionNotify);
+      } else {
+        formData.append("image", e.affiche.name);
+        formData.append("url", e.affiche.secure_url);
+        await axios
+          .post(`${api}spectacle/delete/element/${id}`, formData)
+          .then((response) => {
+            if (response.status === 200) {
+              notify(
+                "success",
+                `Affiche : ${e.affiche.name} supprimée`,
+                optionNotify
+              );
+              setPreviousAffiche("");
+            } else {
+              notify("error", `Une erreur est survenue`, optionNotify);
+            }
+          });
+      }
     }
-    if (type === "imgXL") {
-      formData.append("image", e.imgXL.name);
-      formData.append("url", e.imgXL.secure_url);
-      await axios
-        .post(`${api}spectacle/delete/element/${id}`, formData)
-        .then((response) => {
-          console.log(response);
-          setPreviousImgXL("");
-        });
+    if (name === "imgXL") {
+      if (type === "ajout") {
+        setPreviousImgXL("");
+        // notify("success", `Photo supprimée`, optionNotify);
+      } else {
+        formData.append("image", e.imgXL.name);
+        formData.append("url", e.imgXL.secure_url);
+        await axios
+          .post(`${api}spectacle/delete/element/${id}`, formData)
+          .then((response) => {
+            if (response.status === 200) {
+              notify("success", `Photo supprimée`, optionNotify);
+              setPreviousImgXL("");
+            } else {
+              notify("error", `Une erreur est survenue`, optionNotify);
+            }
+          });
+      }
     }
   };
 
@@ -110,7 +155,7 @@ const InputFiles = ({
         </div>
       ) : musiques ? (
         <div className='previous'>
-          {musiques.map((e, i) => {
+          {sortMusic(musiques).map((e, i) => {
             return (
               <div
                 key={i}
@@ -119,7 +164,7 @@ const InputFiles = ({
                     ? "previousMusic dashed line"
                     : "previousMusic line "
                 }>
-                <p>{e.name}</p>
+                <p>{deleteExtensionFile(e.name)}</p>
                 <FontAwesomeIcon
                   icon='times'
                   color='black'
@@ -130,8 +175,18 @@ const InputFiles = ({
             );
           })}
           {/* ajout de nouvelle musique pendant la modification */}
-          {newMusique &&
-            newMusique.map((e, i) => {
+          {newMusique.length !== 0 && (
+            <p
+              style={{
+                color: "black",
+                margin: "20px 0 10px 0",
+                fontWeight: 500,
+              }}>
+              Nouvelle musiques
+            </p>
+          )}
+          {newMusique.length !== 0 &&
+            sortMusic(newMusique).map((e, i) => {
               return (
                 <div
                   key={i}
@@ -140,7 +195,7 @@ const InputFiles = ({
                       ? "previousMusic dashed line"
                       : "previousMusic line "
                   }>
-                  <p>{e.name}</p>
+                  <p>{deleteExtensionFile(e.name)}</p>
                   <FontAwesomeIcon
                     icon='times'
                     color='black'

@@ -2,13 +2,24 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
 import Btn from "../../components/btn/Btn";
 import Header from "../../components/Header/Header";
 import InputFiles from "../../components/inputFiles/InputFiles";
 import InputLargeText from "../../components/inputLargeText/InputLargeText";
 import InputSmallText from "../../components/inputSmallText/InputSmallText";
 import InputVideo from "../../components/inputVideo/InputVideo";
-import { api } from "../../request/constant";
+import IsLoading from "../../components/IsLoading/IsLoading";
+import {
+  api,
+  deleteAndSortDoublon,
+  deleteAndSortDoublonForUpdate,
+  deleteExtensionFile,
+  notify,
+  optionNotify,
+  sortMusic,
+} from "../../request/constant";
+
 const ModifSpectacle = () => {
   const { id } = useParams();
   const [isLoading, setLoading] = useState(true);
@@ -33,30 +44,56 @@ const ModifSpectacle = () => {
 
   const handleFiles = (e, name) => {
     if (name === "affiche") {
-      if (e.target.files[0].size < 10485760) {
+      if (
+        e.target.files[0].size < 10485760 &&
+        e.target.files[0].type.includes("image/")
+      ) {
         setAffiche(e.target.files[0]);
         setPreviousAffiche(URL.createObjectURL(e.target.files[0]));
       } else {
-        console.log("trop grand");
+        notify(
+          "warning",
+          "La taille ou le format ne correspond pas",
+          optionNotify
+        );
       }
     }
     if (name === "imgXL") {
-      if (e.target.files[0].size < 10485760) {
+      if (
+        e.target.files[0].size < 10485760 &&
+        e.target.files[0].type.includes("image/")
+      ) {
         setImgXL(e.target.files[0]);
         setPreviousImgXL(URL.createObjectURL(e.target.files[0]));
       } else {
-        console.log("trop grand");
+        notify(
+          "warning",
+          "La taille ou le format ne correspond pas",
+          optionNotify
+        );
       }
     }
     if (name === "musiques") {
+      // Ajout des nouvelles musiques dans le tableau NewMusic
       let numberFiles = e.target.files.length;
-
       const newArray = [...newMusique];
       for (let i = 0; i < numberFiles; i++) {
         newArray.push(e.target.files[i]);
       }
-      console.log(newArray);
-      setNewMusique(newArray);
+      const newMusiqueWithoutDoublonWidthOldMusic = [];
+      for (let i = 0; i <= newArray.length - 1; i++) {
+        // Création d'un nouveau tableau avec que les nouvelles musique, en testant si elles sont deja présentes dans les musique de la BDD
+        let testIfDoublon = false;
+        for (let y = 0; y <= musiques.length - 1; y++) {
+          if (deleteExtensionFile(newArray[i].name) === musiques[y].name) {
+            testIfDoublon = true;
+          }
+          if (y === musiques.length - 1 && !testIfDoublon) {
+            newMusiqueWithoutDoublonWidthOldMusic.push(newArray[i]);
+          }
+        }
+      }
+      setNewMusique(newMusiqueWithoutDoublonWidthOldMusic);
     }
   };
   // logique video YT
@@ -75,7 +112,6 @@ const ModifSpectacle = () => {
     setNoteAuteur(result.data.note_des_auteurs);
     setVideos(result.data.video);
     setMusiques(tabMusiques);
-    setLoading(false);
     if (result.data.affiche) {
       setPreviousAffiche(result.data.affiche.secure_url);
     } else {
@@ -87,13 +123,17 @@ const ModifSpectacle = () => {
       setPreviousImgXL("");
     }
   };
+
   useEffect(() => {
-    fetchSpectacle();
+    fetchSpectacle().then(() => {
+      setLoading(false);
+    });
   }, []);
 
   // Envoie du formulaire
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     const formData = new FormData();
     formData.append("nom", title);
     formData.append("minDescription", minDescription);
@@ -109,17 +149,39 @@ const ModifSpectacle = () => {
       i++;
       formData.append("audio" + i, file);
     });
-    await axios
-      .post(`${api}spectacle/update/${id}`, formData)
-      .then((response) => {
-        alert("response", response.status);
-        console.log(response.data);
-        fetchSpectacle();
-      });
+    if (
+      title &&
+      minDescription &&
+      histoire &&
+      previousAffiche &&
+      previousImgXL
+    ) {
+      await axios
+        .post(`${api}spectacle/update/${id}`, formData)
+        .then((response) => {
+          console.log("'reponse'", response);
+          setLoading(false);
+          if (response.status === 200) {
+            // fetchSpectacle();
+            notify("success", "Événement modifié avec succès !", optionNotify);
+          } else {
+            notify("error", "Une erreur est survenue !", optionNotify);
+          }
+        });
+    } else {
+      setLoading(false);
+      notify(
+        "warning",
+        "Vous ne pouvez pas laisser des champs vides",
+        optionNotify
+      );
+    }
   };
 
-  return !isLoading ? (
+  return (
     <div className='containerPage'>
+      {isLoading && <IsLoading absolute />}
+      <ToastContainer />
       <Header title={"Modification du spectacle"} />
       <form
         onSubmit={(e) => handleSubmit(e)}
@@ -210,8 +272,6 @@ const ModifSpectacle = () => {
         </div>
       </form>
     </div>
-  ) : (
-    <p>en attente</p>
   );
 };
 

@@ -9,6 +9,7 @@ import { getAllSpectacle } from "../../../request/spectacle";
 import "./addEvent.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { notify, optionNotify } from "../../../request/constant";
 
 const AddEvent = () => {
   // logique text input
@@ -17,15 +18,6 @@ const AddEvent = () => {
   const [spectacleSelected, setSpectacleIdSelected] = useState("");
   const [adresse, setAdresse] = useState("");
   const [date, setDate] = useState("");
-  const optionNotify = {
-    position: "bottom-right",
-    autoClose: 5000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-  };
 
   const getSpectacleForSelect = async () => {
     // Récupération de tous les spectacles, pour les ajouter dans le select
@@ -50,15 +42,16 @@ const AddEvent = () => {
       const response = await postEvent(formData, spectacleSelected);
       if (response.status === 200) {
         setIsLoading(false);
-        notify("success", "Événement ajouté avec succès !");
+        notify("success", "Événement ajouté avec succès !", optionNotify);
       } else {
         setIsLoading(false);
-        notify("error", "Une erreur est survenue !");
+        notify("error", "Une erreur est survenue !", optionNotify);
       }
     } else {
       notify(
         "warning",
-        "Vous devez remplir tous les champs pour ajouter un événement"
+        "Vous devez remplir tous les champs pour ajouter un événement",
+        optionNotify
       );
     }
   };
@@ -70,10 +63,6 @@ const AddEvent = () => {
   const onChangeDateTime = (value) => {
     // Selection de la date et l'heure
     setDate(value);
-  };
-
-  const notify = (type, text) => {
-    toast[type](text, optionNotify);
   };
 
   return (

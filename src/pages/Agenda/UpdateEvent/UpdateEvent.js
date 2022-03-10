@@ -9,6 +9,7 @@ import InputDateTime from "../../../components/inputDateTime/inputDateTime";
 import { ToastContainer, toast } from "react-toastify";
 import { useParams } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
+import { notify, optionNotify } from "../../../request/constant";
 
 const UpdateEvent = () => {
   // logique text input
@@ -19,15 +20,6 @@ const UpdateEvent = () => {
   const [adresse, setAdresse] = useState("");
   const [date, setDate] = useState("");
   const { id } = useParams();
-  const optionNotify = {
-    position: "bottom-right",
-    autoClose: 5000,
-    hideProgressBar: false,
-    closeOnClick: true,
-    pauseOnHover: true,
-    draggable: true,
-    progress: undefined,
-  };
 
   const getSpectacleForSelect = async () => {
     // Récupération des infos de l'événement
@@ -63,15 +55,16 @@ const UpdateEvent = () => {
       const response = await updateEvent(formData, event._id);
       if (response.status === 200) {
         setIsLoading(false);
-        notify("success", "Événement modifié avec succès !");
+        notify("success", "Événement modifié avec succès !", optionNotify);
       } else {
         setIsLoading(false);
-        notify("error", "Une erreur est survenue !");
+        notify("error", "Une erreur est survenue !", optionNotify);
       }
     } else {
       notify(
         "warning",
-        "Vous devez remplir tous les champs pour ajouter un événement"
+        "Vous ne pouvez pas laisser des champs vides",
+        optionNotify
       );
     }
   };
@@ -85,15 +78,9 @@ const UpdateEvent = () => {
     setDate(value);
   };
 
-  const notify = (type, text) => {
-    toast[type](text, optionNotify);
-  };
-
-  return isLoading ? (
-    <IsLoading />
-  ) : (
+  return (
     <div className='containerPage'>
-      {isLoading && <IsLoading />}
+      {isLoading && <IsLoading absolute />}
       <div>
         <ToastContainer />
       </div>
