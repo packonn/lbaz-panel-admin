@@ -4,9 +4,6 @@ import OptionDots from "../optionDots/OptionDots";
 import "./list.css";
 
 const List = ({ list, reload, page, search, key1Filtered, key2Filtered }) => {
-  console.log("key2Filtered in list", key2Filtered);
-  console.log("key1Filtered in list", key1Filtered);
-
   const [display, setDisplay] = useState();
   const handleDisplay = (id) => {
     if (id === display || !id) {

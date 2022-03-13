@@ -1,7 +1,7 @@
 import { toast } from "react-toastify";
 
-export const api = "http://localhost:3100/";
-// export const api = "https://lbaz.herokuapp.com/";
+// export const api = "http://localhost:3100/";
+export const api = "https://lbaz.herokuapp.com/";
 // export const api = "http://localhost:3000/";
 
 export const optionNotify = {
@@ -25,7 +25,6 @@ export const verifFormatMusic = (numberFiles, e) => {
     tab.push(e[i]);
   }
   for (let i = 0; i < numberFiles; i++) {
-    console.log("object", tab[i].type);
     if (!tab[i].type.includes("audio/mpeg")) {
       response = false;
     }
@@ -76,3 +75,4 @@ export const deleteAndSortDoublon = (arr) => {
 //     }
 //   }
 // };
+

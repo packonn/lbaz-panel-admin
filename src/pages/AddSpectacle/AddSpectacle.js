@@ -15,7 +15,6 @@ import {
   optionNotify,
   verifFormatMusic,
 } from "../../request/constant";
-
 import "./addspectacle.css";
 
 const AddSpectacle = () => {
