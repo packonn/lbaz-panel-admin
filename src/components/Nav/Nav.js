@@ -38,7 +38,7 @@ const Nav = () => {
         </div>
       </div>
       <nav>
-        <NavLink activeClassName='active' to='/spectacles'>
+        <NavLink to='/spectacles'>
           <div className='lienNavigation'>
             <div className='logoNav'>
               <FontAwesomeIcon
@@ -52,7 +52,7 @@ const Nav = () => {
             </div>
           </div>
         </NavLink>
-        <NavLink activeClassName='active' to='/actualite'>
+        <NavLink to='/actualite'>
           <div className='lienNavigation'>
             <div className='logoNav'>
               <FontAwesomeIcon
@@ -66,7 +66,7 @@ const Nav = () => {
             </div>
           </div>
         </NavLink>
-        <NavLink to='/agenda' activeClassName='active'>
+        <NavLink to='/agenda'>
           <div className='lienNavigation'>
             <div className='logoNav'>
               <FontAwesomeIcon
