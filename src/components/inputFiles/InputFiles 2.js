@@ -1,7 +1,9 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
+import { colors } from "../../colors";
 import {
   api,
+  deleteDoublon,
   deleteExtensionFile,
   notify,
   optionNotify,
@@ -173,7 +175,7 @@ const InputFiles = ({
             );
           })}
           {/* ajout de nouvelle musique pendant la modification */}
-          {newMusique && newMusique.length !== 0 && (
+          {newMusique.length !== 0 && (
             <p
               style={{
                 color: "black",
@@ -183,8 +185,7 @@ const InputFiles = ({
               Nouvelle musiques
             </p>
           )}
-          {newMusique &&
-            newMusique.length !== 0 &&
+          {newMusique.length !== 0 &&
             sortMusic(newMusique).map((e, i) => {
               return (
                 <div
