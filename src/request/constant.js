@@ -38,7 +38,6 @@ export const deleteExtensionFile = (fileName) => {
 };
 
 export const sortMusic = (musicTab) => {
-  console.log("musicTab", musicTab);
   // Trie les musiques
   return musicTab.sort((a, b) => {
     let fa = a.name.toLowerCase(),
@@ -75,4 +74,3 @@ export const deleteAndSortDoublon = (arr) => {
 //     }
 //   }
 // };
-
