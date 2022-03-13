@@ -41,7 +41,6 @@ export const postEvent = async (formData, id) => {
   }
 };
 export const updateEvent = async (formData, id) => {
-  console.log("formData", formData, id);
   // Modification d'un événement lié à un spectacle
   try {
     const response = await axios.put(

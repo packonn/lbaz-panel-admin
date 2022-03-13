@@ -2,7 +2,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { toast, ToastContainer } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import Btn from "../../components/btn/Btn";
 import Header from "../../components/Header/Header";
 import InputFiles from "../../components/inputFiles/InputFiles";
@@ -12,12 +12,9 @@ import InputVideo from "../../components/inputVideo/InputVideo";
 import IsLoading from "../../components/IsLoading/IsLoading";
 import {
   api,
-  deleteAndSortDoublon,
-  deleteAndSortDoublonForUpdate,
   deleteExtensionFile,
   notify,
   optionNotify,
-  sortMusic,
 } from "../../request/constant";
 
 const ModifSpectacle = () => {
@@ -159,7 +156,6 @@ const ModifSpectacle = () => {
       await axios
         .post(`${api}spectacle/update/${id}`, formData)
         .then((response) => {
-          console.log("'reponse'", response);
           setLoading(false);
           if (response.status === 200) {
             // fetchSpectacle();

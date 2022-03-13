@@ -4,7 +4,6 @@ export const filteredData = (
   key1Filtered,
   key2Filtered
 ) => {
-  console.log("listData", listData);
   const listFiltered = listData.filter((el) => {
     //if no input the return the original
     if (inputSearch === "") {
