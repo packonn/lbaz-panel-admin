@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import SearchBar from "../../components/searchBar/SearchBar";
 import IsLoading from "../../components/IsLoading/IsLoading";
 import { colors } from "../../colors";
+import { ToastContainer } from "react-toastify";
 
 const Agenda = ({ search, setSearch }) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -29,6 +30,7 @@ const Agenda = ({ search, setSearch }) => {
     <IsLoading />
   ) : (
     <div className='containerPageSpectacles'>
+      <ToastContainer />
       <div className='headerSpectacles'>
         <div className='inputHeaderSpectacles'>
           <FontAwesomeIcon
