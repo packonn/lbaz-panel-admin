@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import { colors } from "../../colors";
 import Btn from "../../components/btn/Btn";
 import IsLoading from "../../components/IsLoading/IsLoading";
@@ -27,6 +28,8 @@ const Spectacles = ({ search, setSearch }) => {
     <IsLoading />
   ) : (
     <div className='containerPageSpectacles'>
+      <ToastContainer />
+
       <div className='headerSpectacles'>
         <div className='inputHeaderSpectacles'>
           <FontAwesomeIcon
