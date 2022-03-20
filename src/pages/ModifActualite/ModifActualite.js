@@ -106,7 +106,7 @@ const ModifActualite = () => {
   };
   return (
     <div className='containerPage'>
-      <Header title={"Modififier l'actualité"} />
+      <Header title={"Modifier l'actualité"} />
       <ToastContainer />
       {isLoading && <IsLoading absolute />}
 
