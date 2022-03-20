@@ -4,22 +4,15 @@ import { Link } from "react-router-dom";
 import { api, notify, optionNotify } from "../../request/constant";
 import "./optiondots.css";
 
-const OptionDots = ({ handleDisplay, id, reload, page }) => {
-  const deleteItem = async () => {
-    // await axios.delete(`${api}${page}/delete/${page}/${id}`);
-    //       reload();
 
-    try {
-      const response = await axios.delete(`${api}${page}/delete/${page}/${id}`);
-      if (response.status === 200) {
-        reload();
-        notify("success", "Suppression réussie", optionNotify);
-      } else notify("error", "Une erreur est survenue", optionNotify);
-      return null;
-    } catch (error) {
-      return null;
-    }
-  };
+const OptionDots = ({
+  handleDisplay,
+  id,
+  page,
+  spectacles,
+  setSpectacles,
+  setDisplay,
+}) => {
 
   return (
     <div className='toggleOption'>
@@ -28,7 +21,23 @@ const OptionDots = ({ handleDisplay, id, reload, page }) => {
           <button>Éditer</button>
         </div>
       </Link>
-      <div className='delete' onClick={deleteItem}>
+      <div
+        className='delete'
+        onClick={async () => {
+          const index = spectacles.findIndex((object) => {
+            return object._id === id;
+          });
+          spectacles.splice(index, 1);
+          setSpectacles(spectacles);
+          setDisplay("");
+          const result = await axios.delete(
+            `${api}${page}/delete/${page}/${id}`
+          );
+          if (result.status === 200) {
+            notify("success", "Spectacle supprimé !", optionNotify);
+          }
+        }}>
+
         <button>Supprimer</button>
       </div>
       <div className='close' onClick={() => handleDisplay()}>
