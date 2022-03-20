@@ -11,12 +11,12 @@ import { api } from "../../request/constant";
 import "./spectacle.css";
 
 const Spectacles = ({ search, setSearch }) => {
-  const [allSpectacles, setAllSpectacle] = useState([]);
+  const [allSpectacles, setAllSpectacles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   const fetchSpectacles = async () => {
     const result = await axios.get(`${api}spectacles`);
-    setAllSpectacle(result.data);
+    setAllSpectacles(result.data);
   };
   useEffect(() => {
     fetchSpectacles().then(() => {
@@ -36,7 +36,7 @@ const Spectacles = ({ search, setSearch }) => {
           />
           <SearchBar search={search} setSearch={setSearch} />
         </div>
-        <Link to='/spectacles/ajout'>
+        <Link to={"/spectacles/ajout"} state={allSpectacles}>
           <Btn txt={"Ajouter un spectacles"} color='gris' />
         </Link>
       </div>
@@ -47,7 +47,7 @@ const Spectacles = ({ search, setSearch }) => {
         search={search}
         page='spectacle'
         list={allSpectacles}
-        reload={fetchSpectacles}
+        setAllSpectacles={setAllSpectacles}
       />
     </div>
   );

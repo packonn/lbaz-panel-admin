@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import Btn from "../../components/btn/Btn";
 import Header from "../../components/Header/Header";
@@ -18,6 +19,8 @@ import {
 import "./addspectacle.css";
 
 const AddSpectacle = () => {
+  const { state } = useLocation();
+
   //logique Files
   const [affiche, setAffiche] = useState();
   const [previousAffiche, setPreviousAffiche] = useState("");
@@ -112,6 +115,7 @@ const AddSpectacle = () => {
     formData.append("affiche", affiche);
     formData.append("imgXL", imgXL);
     formData.append("video", videos);
+    formData.append("clef", state.length);
 
     let i = 0;
     musiques.forEach((file) => {

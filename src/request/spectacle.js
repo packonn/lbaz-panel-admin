@@ -7,7 +7,7 @@ export const getAllSpectacle = async () => {
     const response = await axios.get(`${api}spectacles`);
     return response.data;
   } catch (error) {
-    return null;
+    return [];
   }
 };
 export const getOneSpectacle = async (id) => {
@@ -16,7 +16,7 @@ export const getOneSpectacle = async (id) => {
     const response = await axios.get(`${api}spectacle/${id}`);
     return response.data;
   } catch (error) {
-    return null;
+    return [];
   }
 };
 
@@ -35,7 +35,7 @@ export const postSpectacle = async (formData) => {
     );
     return response.data;
   } catch (error) {
-    return null;
+    return [];
   }
 };
 export const udpateSpectacle = async (id, formData) => {
@@ -51,9 +51,10 @@ export const udpateSpectacle = async (id, formData) => {
       //     },
       //   }
     );
-    return response.data;
+
+    return response;
   } catch (error) {
-    return null;
+    return [];
   }
 };
 
@@ -72,7 +73,7 @@ export const deleteMusicOrImageOneToOne = async (id, formData) => {
     );
     return response.data;
   } catch (error) {
-    return null;
+    return [];
   }
 };
 export const deleteTotallySpectacle = async (id) => {
@@ -83,6 +84,6 @@ export const deleteTotallySpectacle = async (id) => {
     );
     return response.data;
   } catch (error) {
-    return null;
+    return [];
   }
 };

@@ -25,6 +25,8 @@ const InputFiles = ({
   setNewMusique,
   setPreviousImgXL,
   setPreviousAffiche,
+  setPreviousImg,
+  previousImg,
 }) => {
   const deleteItem = async (e, name) => {
     const formData = new FormData();
@@ -98,6 +100,26 @@ const InputFiles = ({
           });
       }
     }
+    if (name === "img") {
+      if (type === "ajout") {
+        setPreviousImg("");
+        // notify("success", `Photo supprimée`, optionNotify);
+      } else {
+        console.log(e);
+        formData.append("image", e.image.name);
+        formData.append("url", e.image.secure_url);
+        await axios
+          .post(`${api}actualite/delete/element/${id}`, formData)
+          .then((response) => {
+            if (response.status === 200) {
+              notify("success", `Photo supprimée`, optionNotify);
+              setPreviousImg("");
+            } else {
+              notify("error", `Une erreur est survenue`, optionNotify);
+            }
+          });
+      }
+    }
   };
 
   const deleteNewMusic = (index) => {
@@ -116,7 +138,7 @@ const InputFiles = ({
         <div className='button-wrapper'>
           <span
             className={
-              previousImgXL || previousAffiche
+              previousImgXL || previousAffiche || previousImg
                 ? "labelSpan disabledInput"
                 : "labelSpan "
             }>
@@ -125,7 +147,9 @@ const InputFiles = ({
           <input
             type='file'
             multiple
-            disabled={previousImgXL || previousAffiche ? true : false}
+            disabled={
+              previousImgXL || previousAffiche || previousImg ? true : false
+            }
             name={name}
             id='upload'
             className='preupload-box'
@@ -133,7 +157,7 @@ const InputFiles = ({
           />
         </div>
       </div>
-      {previousImgXL || previousAffiche ? (
+      {previousImgXL || previousAffiche || previousImg ? (
         <div className='previous '>
           <div className='imgPrevious'>
             <div className='deleteImg'>
@@ -146,7 +170,13 @@ const InputFiles = ({
             </div>
             <img
               style={{ width: "200px", height: "auto", objectFit: "contain" }}
-              src={name === "affiche" ? previousAffiche : previousImgXL}
+              src={
+                name === "affiche"
+                  ? previousAffiche
+                  : name === "imgXL"
+                  ? previousImgXL
+                  : previousImg
+              }
               alt='prévisualisation du fichier upload'
             />
           </div>

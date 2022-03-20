@@ -1,14 +1,14 @@
 // import './agenda.css'
 
-import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
-import { getAllEvents } from "../../request/agenda";
-import List from "../../components/List/List";
-import Btn from "../../components/btn/Btn";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import SearchBar from "../../components/searchBar/SearchBar";
-import IsLoading from "../../components/IsLoading/IsLoading";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { colors } from "../../colors";
+import Btn from "../../components/btn/Btn";
+import IsLoading from "../../components/IsLoading/IsLoading";
+import List from "../../components/List/List";
+import SearchBar from "../../components/searchBar/SearchBar";
+import { getAllEvents } from "../../request/agenda";
 
 const Agenda = ({ search, setSearch }) => {
   const [isLoading, setIsLoading] = useState(true);
