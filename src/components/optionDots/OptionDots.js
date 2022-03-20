@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { api, notify, optionNotify } from "../../request/constant";
 import "./optiondots.css";
 
-
 const OptionDots = ({
   handleDisplay,
   id,
@@ -13,7 +12,6 @@ const OptionDots = ({
   setSpectacles,
   setDisplay,
 }) => {
-
   return (
     <div className='toggleOption'>
       <Link to={`/${page}/modifier/${id}`}>
@@ -27,17 +25,18 @@ const OptionDots = ({
           const index = spectacles.findIndex((object) => {
             return object._id === id;
           });
-          spectacles.splice(index, 1);
-          setSpectacles(spectacles);
-          setDisplay("");
           const result = await axios.delete(
             `${api}${page}/delete/${page}/${id}`
           );
           if (result.status === 200) {
-            notify("success", "Spectacle supprimé !", optionNotify);
+            spectacles.splice(index, 1);
+            setSpectacles(spectacles);
+            setDisplay("");
+            notify("success", "Suppression validée !", optionNotify);
+          } else {
+            notify("warning", "Erreur lors de la suppression !", optionNotify);
           }
         }}>
-
         <button>Supprimer</button>
       </div>
       <div className='close' onClick={() => handleDisplay()}>
