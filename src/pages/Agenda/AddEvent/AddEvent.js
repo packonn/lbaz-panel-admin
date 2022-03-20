@@ -17,6 +17,7 @@ const AddEvent = () => {
   const [allSpectacle, setAllSpectacle] = useState([]);
   const [spectacleSelected, setSpectacleIdSelected] = useState("");
   const [adresse, setAdresse] = useState("");
+  const [billeterie, setBilleterie] = useState("");
   const [date, setDate] = useState("");
 
   const getSpectacleForSelect = async () => {
@@ -36,8 +37,9 @@ const AddEvent = () => {
     e.preventDefault();
     const formData = new FormData();
     formData.append("date", date);
+    formData.append("billeterie", billeterie);
     formData.append("adresse", adresse);
-    if (spectacleSelected && date && adresse) {
+    if (spectacleSelected && date && adresse && billeterie) {
       setIsLoading(true);
       const response = await postEvent(formData, spectacleSelected);
       if (response.status === 200) {
@@ -87,6 +89,13 @@ const AddEvent = () => {
               placeholder={"Adresse de l'événement"}
             />
           </div>
+          <InputSmallText
+            text={billeterie}
+            setText={setBilleterie}
+            type={"text"}
+            name={"billeterie"}
+            placeholder={"Lien vers achat des billets"}
+          />
           <div className='inputMarge'>
             <InputDateTime onChange={onChangeDateTime} />
           </div>

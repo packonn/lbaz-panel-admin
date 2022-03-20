@@ -18,6 +18,7 @@ const UpdateEvent = () => {
   const [allSpectacle, setAllSpectacle] = useState([]);
   const [spectacleSelected, setSpectacleIdSelected] = useState("");
   const [adresse, setAdresse] = useState("");
+  const [billeterie, setBilleterie] = useState("");
   const [date, setDate] = useState("");
   const { id } = useParams();
 
@@ -31,6 +32,7 @@ const UpdateEvent = () => {
     // Récupération de tous les spectacles, pour les ajouter dans le select
     const event = await getOneEvent(id);
     setEvent(event);
+    setBilleterie(event.billeterie);
     setAdresse(event.adresse);
     setDate(event.date);
     setSpectacleIdSelected(event.spectacle._id);
@@ -50,8 +52,10 @@ const UpdateEvent = () => {
     const formData = new FormData();
     formData.append("date", date);
     formData.append("adresse", adresse);
-    if (spectacleSelected && date && adresse) {
+    formData.append("billeterie", billeterie);
+    if (spectacleSelected && date && adresse && billeterie) {
       setIsLoading(true);
+
       const response = await updateEvent(formData, event._id);
       if (response.status === 200) {
         setIsLoading(false);
@@ -100,18 +104,22 @@ const UpdateEvent = () => {
               placeholder={event.adresse}
             />
           </div>
+          <InputSmallText
+            text={billeterie}
+            setText={setBilleterie}
+            type={"text"}
+            name={"billeterie"}
+            placeholder={event.billeterie}
+          />
           <div className='inputMarge'>
             <InputDateTime defaultValue={date} onChange={onChangeDateTime} />
           </div>
-
           <select className='inputMarge' name='select' onChange={handleSelect}>
-            {allSpectacle.map((spectacle) => {
+            {allSpectacle.map((spectacle, index) => {
               return (
                 <option
-                  key={spectacle._id}
-                  selected={
-                    spectacle._id === event.spectacle._id ? true : false
-                  }
+                  key={index}
+                  selected={spectacle._id === spectacleSelected ? true : false}
                   value={spectacle._id}>
                   {spectacle.nom}
                 </option>
