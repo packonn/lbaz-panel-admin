@@ -7,7 +7,7 @@ import InputSmallText from "../../../components/inputSmallText/InputSmallText";
 import IsLoading from "../../../components/IsLoading/IsLoading";
 import { getAllSpectacle } from "../../../request/spectacle";
 import "./addEvent.css";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { notify, optionNotify } from "../../../request/constant";
 
@@ -68,7 +68,7 @@ const AddEvent = () => {
   };
 
   return (
-    <div className='containerPage'>
+    <div className="containerPage">
       {isLoading && <IsLoading />}
       <div>
         <ToastContainer />
@@ -78,9 +78,10 @@ const AddEvent = () => {
         onSubmit={(e) => handleSubmit(e)}
         onKeyPress={(e) => {
           e.key === "Enter" && e.preventDefault();
-        }}>
-        <div className='sideLeft'>
-          <div className='inputAdress'>
+        }}
+      >
+        <div className="sideLeft">
+          <div className="inputAdress">
             <InputSmallText
               text={adresse}
               setText={setAdresse}
@@ -89,6 +90,7 @@ const AddEvent = () => {
               placeholder={"Adresse de l'événement"}
             />
           </div>
+
           <InputSmallText
             text={billeterie}
             setText={setBilleterie}
@@ -96,16 +98,17 @@ const AddEvent = () => {
             name={"billeterie"}
             placeholder={"Lien vers achat des billets"}
           />
-          <div className='inputMarge'>
+          <div className="inputMarge">
             <InputDateTime onChange={onChangeDateTime} />
           </div>
 
           <select
-            className='inputMarge'
-            name='select'
+            className="inputMarge"
+            name="select"
             defaultValue={""}
-            onChange={handleSelect}>
-            <option value='' selected disabled>
+            onChange={handleSelect}
+          >
+            <option value="" selected disabled>
               Sélectionnez un spectacle
             </option>
             {allSpectacle.map((spectacle) => {
@@ -119,7 +122,7 @@ const AddEvent = () => {
 
           <Btn txt={"Ajouter l'événement"} color={"gris"} type={"submit"} />
         </div>
-        <div className='sideRight'></div>
+        <div className="sideRight"></div>
       </form>
     </div>
   );
