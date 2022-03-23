@@ -53,6 +53,7 @@ const UpdateEvent = () => {
     formData.append("date", date);
     formData.append("adresse", adresse);
     formData.append("billeterie", billeterie);
+    formData.append("spectacle_id", spectacleSelected);
     if (spectacleSelected && date && adresse && billeterie) {
       setIsLoading(true);
 
@@ -105,13 +106,7 @@ const UpdateEvent = () => {
               placeholder={event.adresse}
             />
           </div>
-          <InputSmallText
-            text={billeterie}
-            setText={setBilleterie}
-            type={"text"}
-            name={"billeterie"}
-            placeholder={event.billeterie}
-          />
+
           <InputSmallText
             text={billeterie}
             setText={setBilleterie}
