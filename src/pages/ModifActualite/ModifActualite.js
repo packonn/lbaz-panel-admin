@@ -83,7 +83,10 @@ const ModifActualite = () => {
     formData.append("date", date);
     formData.append("image", img);
 
-    if (nom && minDescription && description && img) {
+    if (
+      (nom && minDescription && description && img) ||
+      (nom && minDescription && description && previousImg)
+    ) {
       await axios
         .post(`${api}actualite/update/${id}`, formData)
         .then((response) => {
