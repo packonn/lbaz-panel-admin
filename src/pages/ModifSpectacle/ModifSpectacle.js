@@ -175,7 +175,7 @@ const ModifSpectacle = () => {
   };
 
   return (
-    <div className='containerPage'>
+    <div className="containerPage">
       {isLoading && <IsLoading absolute />}
       <ToastContainer />
       <Header title={"Modification du spectacle"} />
@@ -183,8 +183,9 @@ const ModifSpectacle = () => {
         onSubmit={(e) => handleSubmit(e)}
         onKeyPress={(e) => {
           e.key === "Enter" && e.preventDefault();
-        }}>
-        <div className='sideLeft'>
+        }}
+      >
+        <div className="sideLeft">
           <InputSmallText
             text={title}
             setText={setTitle}
@@ -198,7 +199,7 @@ const ModifSpectacle = () => {
             type={"text"}
             name={"title"}
             placeholder={"Mini description (max 100 charactères)"}
-            max={100}
+            max={200}
           />
           <label>L'histoire</label>
           <InputLargeText
@@ -231,7 +232,7 @@ const ModifSpectacle = () => {
           />
           <Btn txt={"Modifier le spectacle"} color={"gris"} type={"submit"} />
         </div>
-        <div className='sideRight'>
+        <div className="sideRight">
           <InputFiles
             spectacle={spectacle}
             affiche={affiche}
