@@ -6,7 +6,7 @@ import Header from "../../../components/Header/Header";
 import IsLoading from "../../../components/IsLoading/IsLoading";
 import { getAllSpectacle } from "../../../request/spectacle";
 import InputDateTime from "../../../components/inputDateTime/inputDateTime";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import { useParams } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import { notify, optionNotify } from "../../../request/constant";
@@ -83,7 +83,7 @@ const UpdateEvent = () => {
   };
 
   return (
-    <div className='containerPage'>
+    <div className="containerPage">
       {isLoading && <IsLoading absolute />}
       <div>
         <ToastContainer />
@@ -93,9 +93,10 @@ const UpdateEvent = () => {
         onSubmit={(e) => handleSubmit(e)}
         onKeyPress={(e) => {
           e.key === "Enter" && e.preventDefault();
-        }}>
-        <div className='sideLeft'>
-          <div className='inputAdress'>
+        }}
+      >
+        <div className="sideLeft">
+          <div className="inputAdress">
             <InputSmallText
               text={adresse}
               setText={setAdresse}
@@ -111,16 +112,24 @@ const UpdateEvent = () => {
             name={"billeterie"}
             placeholder={event.billeterie}
           />
-          <div className='inputMarge'>
+          <InputSmallText
+            text={billeterie}
+            setText={setBilleterie}
+            type={"text"}
+            name={"billeterie"}
+            placeholder={event.billeterie}
+          />
+          <div className="inputMarge">
             <InputDateTime defaultValue={date} onChange={onChangeDateTime} />
           </div>
-          <select className='inputMarge' name='select' onChange={handleSelect}>
+          <select className="inputMarge" name="select" onChange={handleSelect}>
             {allSpectacle.map((spectacle, index) => {
               return (
                 <option
                   key={index}
                   selected={spectacle._id === spectacleSelected ? true : false}
-                  value={spectacle._id}>
+                  value={spectacle._id}
+                >
                   {spectacle.nom}
                 </option>
               );
@@ -129,7 +138,7 @@ const UpdateEvent = () => {
 
           <Btn txt={"Modifier l'événement"} color={"gris"} type={"submit"} />
         </div>
-        <div className='sideRight'></div>
+        <div className="sideRight"></div>
       </form>
     </div>
   );

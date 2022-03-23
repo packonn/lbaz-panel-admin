@@ -1,5 +1,5 @@
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { fab } from "@fortawesome/free-brands-svg-icons";
+// import { fab } from "@fortawesome/free-brands-svg-icons";
 import { faSearch, faTimes, faUser } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
@@ -17,32 +17,32 @@ import ModifSpectacle from "./pages/ModifSpectacle/ModifSpectacle";
 import Spectacles from "./pages/Spectacles/Spectacles";
 
 function App() {
-  library.add(fab, faUser, faSearch, faTimes);
+  library.add(faUser, faSearch, faTimes);
   const [search, setSearch] = useState("");
 
   return (
-    <div className='App'>
+    <div className="App">
       <Nav />
       <Routes>
-        <Route path='/' element={<Home />} />
+        <Route path="/" element={<Home />} />
         <Route
-          path='/spectacles'
+          path="/spectacles"
           element={<Spectacles search={search} setSearch={setSearch} />}
         />
-        <Route path='/spectacles/ajout' element={<AddSpectacle />} />
-        <Route path='/spectacle/modifier/:id' element={<ModifSpectacle />} />
+        <Route path="/spectacles/ajout" element={<AddSpectacle />} />
+        <Route path="/spectacle/modifier/:id" element={<ModifSpectacle />} />
         <Route
-          path='/agenda'
+          path="/agenda"
           element={<Agenda search={search} setSearch={setSearch} />}
         />
-        <Route path='/agenda/ajout' element={<AddEvent />} />
-        <Route path='/agenda/modifier/:id' element={<UpdateEvent />} />
+        <Route path="/agenda/ajout" element={<AddEvent />} />
+        <Route path="/agenda/modifier/:id" element={<UpdateEvent />} />
         <Route
-          path='/actualite'
+          path="/actualite"
           element={<Actualite search={search} setSearch={setSearch} />}
         />
-        <Route path='/actualite/ajout' element={<AddActualite />} />
-        <Route path='/actualite/modifier/:id' element={<ModifActualite />} />
+        <Route path="/actualite/ajout" element={<AddActualite />} />
+        <Route path="/actualite/modifier/:id" element={<ModifActualite />} />
       </Routes>
     </div>
   );
