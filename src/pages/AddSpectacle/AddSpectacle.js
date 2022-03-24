@@ -127,12 +127,13 @@ const AddSpectacle = () => {
       title &&
       mes &&
       noteAuteur &&
-      boxSong &&
+      // boxSong &&
       videos &&
       minDescription &&
       histoire &&
       previousAffiche &&
-      previousImgXL
+      previousImgXL &&
+      musiques
     ) {
       const response = await axios.post(
         `${api}spectacle/publication`,
@@ -168,7 +169,7 @@ const AddSpectacle = () => {
   };
 
   return (
-    <div className='containerPage'>
+    <div className="containerPage">
       <Header title={"Ajout d'un spectacle"} />
       <ToastContainer />
       {isLoading && <IsLoading absolute />}
@@ -177,8 +178,9 @@ const AddSpectacle = () => {
         onSubmit={(e) => handleSubmit(e)}
         onKeyPress={(e) => {
           e.key === "Enter" && e.preventDefault();
-        }}>
-        <div className='sideLeft'>
+        }}
+      >
+        <div className="sideLeft">
           <InputSmallText
             text={title}
             setText={setTitle}
@@ -225,9 +227,9 @@ const AddSpectacle = () => {
           />
           <Btn txt={"Ajouter le spectacle"} color={"gris"} type={"submit"} />
         </div>
-        <div className='sideRight'>
+        <div className="sideRight">
           <InputFiles
-            type='ajout'
+            type="ajout"
             setPreviousAffiche={setPreviousAffiche}
             previousAffiche={previousAffiche}
             handleFiles={handleFiles}
@@ -236,7 +238,7 @@ const AddSpectacle = () => {
             title={"Affiche"}
           />
           <InputFiles
-            type='ajout'
+            type="ajout"
             setPreviousImgXL={setPreviousImgXL}
             previousImgXL={previousImgXL}
             handleFiles={handleFiles}
@@ -245,7 +247,7 @@ const AddSpectacle = () => {
             title={"Image"}
           />
           <InputFiles
-            type='ajout'
+            type="ajout"
             setMusiques={setMusiques}
             // previousMusiques={previousMusiques}
             musiques={musiques}
