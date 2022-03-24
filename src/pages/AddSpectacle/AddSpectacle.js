@@ -133,7 +133,7 @@ const AddSpectacle = () => {
       histoire &&
       previousAffiche &&
       previousImgXL &&
-      musiques
+      musiques.length !== 0
     ) {
       const response = await axios.post(
         `${api}spectacle/publication`,
