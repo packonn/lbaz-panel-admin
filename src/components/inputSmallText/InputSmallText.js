@@ -1,16 +1,25 @@
 import "./inputSmallText.css";
 
-const InputSmallText = ({ type, name, placeholder, max, text, setText }) => {
+const InputSmallText = ({
+  type,
+  name,
+  placeholder,
+  max,
+  text,
+  setText,
+  required,
+}) => {
   return (
     <input
-      className='inputSmall'
+      className="inputSmall"
       type={type}
       name={name}
       id={name}
       placeholder={placeholder}
-      maxLength={max}
+      maxLength={250}
       value={text}
       onChange={(e) => setText(e.target.value)}
+      required={required}
     />
   );
 };

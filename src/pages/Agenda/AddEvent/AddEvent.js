@@ -83,6 +83,7 @@ const AddEvent = () => {
         <div className="sideLeft">
           <div className="inputAdress">
             <InputSmallText
+              required={true}
               text={adresse}
               setText={setAdresse}
               type={"text"}
@@ -92,6 +93,7 @@ const AddEvent = () => {
           </div>
 
           <InputSmallText
+            required={true}
             text={billeterie}
             setText={setBilleterie}
             type={"text"}
@@ -107,6 +109,7 @@ const AddEvent = () => {
             name="select"
             defaultValue={""}
             onChange={handleSelect}
+            required
           >
             <option value="" selected disabled>
               Sélectionnez un spectacle

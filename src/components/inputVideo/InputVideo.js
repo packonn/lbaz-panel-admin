@@ -1,17 +1,18 @@
 import "./inputVideo.css";
 
-const InputVideo = ({ setVideos, videos }) => {
+const InputVideo = ({ setVideos, videos, required }) => {
   return (
-    <div className='containerFiles'>
-      <div className='title'>
+    <div className="containerFiles">
+      <div className="title">
         <p>Videos</p>
       </div>
-      <div className='containerInput'>
+      <div className="containerInput">
         <input
-          type='text'
-          name='lien'
+          required={required}
+          type="text"
+          name="lien"
           placeholder="Copier l'URL de la vidéo"
-          id='uploadVideo'
+          id="uploadVideo"
           value={videos}
           onChange={(e) => setVideos(e.target.value)}
         />

@@ -3,19 +3,19 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import Btn from "../../components/btn/Btn";
-import Header from "../../components/Header/Header";
-import InputFiles from "../../components/inputFiles/InputFiles";
-import InputLargeText from "../../components/inputLargeText/InputLargeText";
-import InputSmallText from "../../components/inputSmallText/InputSmallText";
-import InputVideo from "../../components/inputVideo/InputVideo";
-import IsLoading from "../../components/IsLoading/IsLoading";
+import Btn from "../../../components/btn/Btn";
+import Header from "../../../components/Header/Header";
+import InputFiles from "../../../components/inputFiles/InputFiles";
+import InputLargeText from "../../../components/inputLargeText/InputLargeText";
+import InputSmallText from "../../../components/inputSmallText/InputSmallText";
+import InputVideo from "../../../components/inputVideo/InputVideo";
+import IsLoading from "../../../components/IsLoading/IsLoading";
 import {
   api,
   deleteExtensionFile,
   notify,
   optionNotify,
-} from "../../request/constant";
+} from "../../../request/constant";
 
 const ModifSpectacle = () => {
   const { id } = useParams();
@@ -198,7 +198,7 @@ const ModifSpectacle = () => {
             setText={setMinDescription}
             type={"text"}
             name={"title"}
-            placeholder={"Mini description (max 100 charactères)"}
+            placeholder={"Mini description (max 250 charactères)"}
             max={200}
           />
           <label>L'histoire</label>
@@ -234,6 +234,7 @@ const ModifSpectacle = () => {
         </div>
         <div className="sideRight">
           <InputFiles
+            accept=".JPEG,.JPG,.PNG,.WEBP"
             spectacle={spectacle}
             affiche={affiche}
             previousAffiche={previousAffiche}
@@ -245,6 +246,7 @@ const ModifSpectacle = () => {
             id={id}
           />
           <InputFiles
+            accept=".JPEG,.JPG,.PNG,.WEBP"
             spectacle={spectacle}
             handleFiles={handleFiles}
             previousImgXL={previousImgXL}
@@ -255,6 +257,7 @@ const ModifSpectacle = () => {
             id={id}
           />
           <InputFiles
+            accept=".mp3,.mpeg"
             setNewMusique={setNewMusique}
             setMusiques={setMusiques}
             id={id}

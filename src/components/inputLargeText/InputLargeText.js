@@ -1,13 +1,15 @@
 import "./inputLargeText.css";
 
-const InputLargeText = ({ name, placeholder, text, setText }) => {
+const InputLargeText = ({ name, placeholder, text, setText, required }) => {
   return (
     <textarea
       value={text}
       onChange={(e) => setText(e.target.value)}
       id={name}
       name={name}
-      placeholder={placeholder}></textarea>
+      required={required}
+      placeholder={placeholder}
+    ></textarea>
   );
 };
 

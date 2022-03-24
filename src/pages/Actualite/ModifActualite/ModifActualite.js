@@ -3,13 +3,13 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import Btn from "../../components/btn/Btn";
-import Header from "../../components/Header/Header";
-import InputFiles from "../../components/inputFiles/InputFiles";
-import InputLargeText from "../../components/inputLargeText/InputLargeText";
-import InputSmallText from "../../components/inputSmallText/InputSmallText";
-import IsLoading from "../../components/IsLoading/IsLoading";
-import { api, notify, optionNotify } from "../../request/constant";
+import Btn from "../../../components/btn/Btn";
+import Header from "../../../components/Header/Header";
+import InputFiles from "../../../components/inputFiles/InputFiles";
+import InputLargeText from "../../../components/inputLargeText/InputLargeText";
+import InputSmallText from "../../../components/inputSmallText/InputSmallText";
+import IsLoading from "../../../components/IsLoading/IsLoading";
+import { api, notify, optionNotify } from "../../../request/constant";
 const ModifActualite = () => {
   const { id } = useParams();
   // Date d'aujourd'hui
@@ -108,7 +108,7 @@ const ModifActualite = () => {
     }
   };
   return (
-    <div className='containerPage'>
+    <div className="containerPage">
       <Header title={"Modifier l'actualité"} />
       <ToastContainer />
       {isLoading && <IsLoading absolute />}
@@ -117,8 +117,9 @@ const ModifActualite = () => {
         onSubmit={(e) => handleSubmit(e)}
         onKeyPress={(e) => {
           e.key === "Enter" && e.preventDefault();
-        }}>
-        <div className='sideLeft'>
+        }}
+      >
+        <div className="sideLeft">
           <InputSmallText
             text={nom}
             setText={setNom}
@@ -131,7 +132,7 @@ const ModifActualite = () => {
             setText={setMinDescription}
             type={"text"}
             name={"title"}
-            placeholder={"Mini description (max 100 charactères)"}
+            placeholder={"Mini description (max 250 charactères)"}
             max={100}
           />
           <label>Description</label>
@@ -144,8 +145,9 @@ const ModifActualite = () => {
 
           <Btn txt={"Modifier l'actualité"} color={"gris"} type={"submit"} />
         </div>
-        <div className='sideRight'>
+        <div className="sideRight">
           <InputFiles
+            accept=".JPEG,.JPG,.PNG,.WEBP"
             setPreviousImg={setPreviousImg}
             previousImg={previousImg}
             handleFiles={handleFiles}
@@ -163,9 +165,9 @@ const ModifActualite = () => {
             placeholder={"Lien de l'actualité"}
           />
           <input
-            type='date'
-            name='date'
-            id='inputDate'
+            type="date"
+            name="date"
+            id="inputDate"
             defaultValue={today.toISOString().slice(0, 10)}
             onChange={(e) => {
               setDate(e.target.value);

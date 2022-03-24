@@ -10,6 +10,8 @@ import {
 import "./inputFiles.css";
 
 const InputFiles = ({
+  required,
+  accept,
   type,
   name,
   label,
@@ -129,41 +131,44 @@ const InputFiles = ({
   };
 
   return (
-    <div className='containerFiles'>
-      <div className='title'>
+    <div className="containerFiles">
+      <div className="title">
         <p>{title}</p>
       </div>
-      <div className='containerInput'>
-        <label className='label'>{label}</label>
-        <div className='button-wrapper'>
+      <div className="containerInput">
+        <label className="label">{label}</label>
+        <div className="button-wrapper">
           <span
             className={
               previousImgXL || previousAffiche || previousImg
                 ? "labelSpan disabledInput"
                 : "labelSpan "
-            }>
+            }
+          >
             ajouter un fichier
           </span>
           <input
-            type='file'
+            required={required}
+            type={"file"}
+            accept={accept}
             multiple
             disabled={
               previousImgXL || previousAffiche || previousImg ? true : false
             }
             name={name}
-            id='upload'
-            className='preupload-box'
+            id="upload"
+            className="preupload-box"
             onChange={(e) => handleFiles(e, name)}
           />
         </div>
       </div>
       {previousImgXL || previousAffiche || previousImg ? (
-        <div className='previous '>
-          <div className='imgPrevious'>
-            <div className='deleteImg'>
+        <div className="previous ">
+          <div className="imgPrevious">
+            <div className="deleteImg">
               <FontAwesomeIcon
-                icon='times'
-                color='white'
+                icon="times"
+                color="white"
                 style={{ cursor: "pointer" }}
                 onClick={() => deleteItem(spectacle, name)}
               />
@@ -177,12 +182,12 @@ const InputFiles = ({
                   ? previousImgXL
                   : previousImg
               }
-              alt='prévisualisation du fichier upload'
+              alt="prévisualisation du fichier upload"
             />
           </div>
         </div>
       ) : musiques ? (
-        <div className='previous'>
+        <div className="previous">
           {sortMusic(musiques).map((e, i) => {
             return (
               <div
@@ -191,11 +196,12 @@ const InputFiles = ({
                   musiques.length > 0 || newMusique.length > 0
                     ? "previousMusic dashed line"
                     : "previousMusic line "
-                }>
+                }
+              >
                 <p>{deleteExtensionFile(e.name)}</p>
                 <FontAwesomeIcon
-                  icon='times'
-                  color='black'
+                  icon="times"
+                  color="black"
                   style={{ cursor: "pointer" }}
                   onClick={() => deleteItem(e, "musique")}
                 />
@@ -209,7 +215,8 @@ const InputFiles = ({
                 color: "black",
                 margin: "20px 0 10px 0",
                 fontWeight: 500,
-              }}>
+              }}
+            >
               Nouvelle musiques
             </p>
           )}
@@ -223,11 +230,12 @@ const InputFiles = ({
                     newMusique.length > 1 || musiques.length > 0
                       ? "previousMusic dashed line"
                       : "previousMusic line "
-                  }>
+                  }
+                >
                   <p>{deleteExtensionFile(e.name)}</p>
                   <FontAwesomeIcon
-                    icon='times'
-                    color='black'
+                    icon="times"
+                    color="black"
                     style={{ cursor: "pointer" }}
                     onClick={() => deleteNewMusic(i)}
                   />

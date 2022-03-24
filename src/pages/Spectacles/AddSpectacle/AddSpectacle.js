@@ -2,20 +2,20 @@ import axios from "axios";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import Btn from "../../components/btn/Btn";
-import Header from "../../components/Header/Header";
-import InputFiles from "../../components/inputFiles/InputFiles";
-import InputLargeText from "../../components/inputLargeText/InputLargeText";
-import InputSmallText from "../../components/inputSmallText/InputSmallText";
-import InputVideo from "../../components/inputVideo/InputVideo";
-import IsLoading from "../../components/IsLoading/IsLoading";
+import Btn from "../../../components/btn/Btn";
+import Header from "../../../components/Header/Header";
+import InputFiles from "../../../components/inputFiles/InputFiles";
+import InputLargeText from "../../../components/inputLargeText/InputLargeText";
+import InputSmallText from "../../../components/inputSmallText/InputSmallText";
+import InputVideo from "../../../components/inputVideo/InputVideo";
+import IsLoading from "../../../components/IsLoading/IsLoading";
 import {
   api,
   deleteAndSortDoublon,
   notify,
   optionNotify,
   verifFormatMusic,
-} from "../../request/constant";
+} from "../../../request/constant";
 import "./addspectacle.css";
 
 const AddSpectacle = () => {
@@ -182,6 +182,7 @@ const AddSpectacle = () => {
       >
         <div className="sideLeft">
           <InputSmallText
+            required={true}
             text={title}
             setText={setTitle}
             type={"text"}
@@ -189,22 +190,25 @@ const AddSpectacle = () => {
             placeholder={"Titre du Spectacle"}
           />
           <InputSmallText
+            required={true}
             text={minDescription}
             setText={setMinDescription}
             type={"text"}
             name={"title"}
-            placeholder={"Mini description (max 100 charactères)"}
+            placeholder={"Mini description (max 250 charactères)"}
             max={100}
           />
           <label>L'histoire</label>
           <InputLargeText
             name={"histoire"}
+            required={true}
             placeholder={"L'histoire"}
             text={histoire}
             setText={setHistoire}
           />
           <label>Intention de mise en scène</label>
           <InputLargeText
+            required={true}
             name={"miseEnScene"}
             placeholder={"Intention de mise en scène"}
             text={mes}
@@ -212,12 +216,14 @@ const AddSpectacle = () => {
           />
           <label>Note des auteurs</label>
           <InputLargeText
+            required={true}
             name={"noteAuteur"}
             placeholder={"Note des auteurs"}
             text={noteAuteur}
             setText={setNoteAuteur}
           />
           <InputSmallText
+            required={false}
             text={boxSong}
             setText={setBoxSong}
             type={"text"}
@@ -229,6 +235,8 @@ const AddSpectacle = () => {
         </div>
         <div className="sideRight">
           <InputFiles
+            required={true}
+            accept=".JPEG,.JPG,.PNG,.WEBP"
             type="ajout"
             setPreviousAffiche={setPreviousAffiche}
             previousAffiche={previousAffiche}
@@ -238,7 +246,9 @@ const AddSpectacle = () => {
             title={"Affiche"}
           />
           <InputFiles
+            required={true}
             type="ajout"
+            accept=".JPEG,.JPG,.PNG,.WEBP"
             setPreviousImgXL={setPreviousImgXL}
             previousImgXL={previousImgXL}
             handleFiles={handleFiles}
@@ -247,7 +257,9 @@ const AddSpectacle = () => {
             title={"Image"}
           />
           <InputFiles
+            required={true}
             type="ajout"
+            accept=".mp3,.mpeg"
             setMusiques={setMusiques}
             // previousMusiques={previousMusiques}
             musiques={musiques}
@@ -256,7 +268,7 @@ const AddSpectacle = () => {
             label={"Musique du spectacle"}
             title={"Musiques"}
           />
-          <InputVideo setVideos={setVideos} videos={videos} />
+          <InputVideo setVideos={setVideos} videos={videos} required={true} />
         </div>
       </form>
     </div>

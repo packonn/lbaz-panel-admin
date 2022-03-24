@@ -15,9 +15,10 @@ const InputDateTime = ({ onChange, defaultValue }) => {
   return (
     <input
       defaultValue={defaultValue ? defaultValue?.slice(0, 16) : null}
-      type='datetime-local'
-      name='date'
-      id='inputDate'
+      type="datetime-local"
+      name="date"
+      id="inputDate"
+      required
       min={currentDay()}
       max={nextDay()}
       onChange={(e) => {
