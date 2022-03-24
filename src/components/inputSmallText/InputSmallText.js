@@ -10,17 +10,20 @@ const InputSmallText = ({
   required,
 }) => {
   return (
-    <input
-      className="inputSmall"
-      type={type}
-      name={name}
-      id={name}
-      placeholder={placeholder}
-      maxLength={250}
-      value={text}
-      onChange={(e) => setText(e.target.value)}
-      required={required}
-    />
+    <label>
+      {placeholder}
+      <input
+        className="inputSmall"
+        type={type}
+        name={name}
+        id={name}
+        // placeholder={placeholder}
+        maxLength={250}
+        value={text}
+        onChange={(e) => setText(e.target.value)}
+        required={required}
+      />
+    </label>
   );
 };
 

@@ -106,27 +106,31 @@ const AddActualite = () => {
             type={"text"}
             name={"title"}
             required={true}
-            placeholder={"Titre de l'actualité"}
+            placeholder={"Titre de l'actualité *"}
           />
           <InputSmallText
             text={minDescription}
             setText={setMinDescription}
             type={"text"}
             name={"title"}
-            placeholder={"Mini description (max 250 charactères)"}
+            placeholder={"Mini description (max 250 charactères) *"}
             max={100}
             required={true}
           />
-          <label>Description</label>
           <InputLargeText
             name={"description"}
-            placeholder={"Description"}
+            placeholder={"Description *"}
             text={description}
             setText={setDescription}
             required={true}
           />
 
-          <Btn txt={"Ajouter une actualité"} color={"gris"} type={"submit"} />
+          <Btn
+            msg={true}
+            txt={"Ajouter une actualité"}
+            color={"gris"}
+            type={"submit"}
+          />
         </div>
         <div className="sideRight">
           <InputFiles
@@ -137,7 +141,7 @@ const AddActualite = () => {
             handleFiles={handleFiles}
             name={"img"}
             label={"Photo de l'actualité"}
-            title={"Image"}
+            title={"Image *"}
             required={true}
           />
           <InputSmallText
@@ -148,16 +152,19 @@ const AddActualite = () => {
             placeholder={"Lien de l'actualité"}
             required={false}
           />
-          <input
-            type="date"
-            name="date"
-            id="inputDate"
-            defaultValue={today.toISOString().slice(0, 10)}
-            onChange={(e) => {
-              setDate(e.target.value);
-            }}
-            required
-          />
+          <label>
+            Date de l'événement *
+            <input
+              type="date"
+              name="date"
+              id="inputDate"
+              defaultValue={today.toISOString().slice(0, 10)}
+              onChange={(e) => {
+                setDate(e.target.value);
+              }}
+              required
+            />
+          </label>
         </div>
       </form>
     </div>

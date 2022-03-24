@@ -191,34 +191,31 @@ const ModifSpectacle = () => {
             setText={setTitle}
             type={"text"}
             name={"title"}
-            placeholder={"Titre du Spectacle"}
+            placeholder={"Titre du Spectacle *"}
           />
           <InputSmallText
             text={minDescription}
             setText={setMinDescription}
             type={"text"}
             name={"title"}
-            placeholder={"Mini description (max 250 charactères)"}
+            placeholder={"Mini description (max 250 charactères) *"}
             max={200}
           />
-          <label>L'histoire</label>
           <InputLargeText
             name={"histoire"}
-            placeholder={"L'histoire"}
+            placeholder={"L'histoire *"}
             text={histoire}
             setText={setHistoire}
           />
-          <label>Intention de mise en scène</label>
           <InputLargeText
             name={"miseEnScene"}
-            placeholder={"Intention de mise en scène"}
+            placeholder={"Intention de mise en scène *"}
             text={mes}
             setText={setMes}
           />
-          <label>Note des auteurs</label>
           <InputLargeText
             name={"noteAuteur"}
-            placeholder={"Note des auteurs"}
+            placeholder={"Note des auteurs *"}
             text={noteAuteur}
             setText={setNoteAuteur}
           />
@@ -230,7 +227,12 @@ const ModifSpectacle = () => {
             placeholder={"Lien vers BoxSongs"}
             max={100}
           />
-          <Btn txt={"Modifier le spectacle"} color={"gris"} type={"submit"} />
+          <Btn
+            msg={true}
+            txt={"Modifier le spectacle"}
+            color={"gris"}
+            type={"submit"}
+          />
         </div>
         <div className="sideRight">
           <InputFiles
@@ -241,7 +243,7 @@ const ModifSpectacle = () => {
             handleFiles={handleFiles}
             name={"affiche"}
             label={"Affiche du spectacle"}
-            title={"Affiche"}
+            title={"Affiche (à la verticale)*"}
             setPreviousAffiche={setPreviousAffiche}
             id={id}
           />
@@ -252,7 +254,7 @@ const ModifSpectacle = () => {
             previousImgXL={previousImgXL}
             name={"imgXL"}
             label={"Photo du spectacle"}
-            title={"Image"}
+            title={"Grande image (à l'horizontale)*"}
             setPreviousImgXL={setPreviousImgXL}
             id={id}
           />
@@ -266,7 +268,7 @@ const ModifSpectacle = () => {
             handleFiles={handleFiles}
             name={"musiques"}
             label={"Musique du spectacle"}
-            title={"Musiques"}
+            title={"Musiques *"}
           />
           <InputVideo setVideos={setVideos} videos={videos} />
         </div>

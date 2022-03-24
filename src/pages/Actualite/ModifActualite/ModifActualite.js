@@ -125,25 +125,28 @@ const ModifActualite = () => {
             setText={setNom}
             type={"text"}
             name={"title"}
-            placeholder={"Titre de l'actualité"}
+            placeholder={"Titre de l'actualité *"}
           />
           <InputSmallText
             text={minDescription}
             setText={setMinDescription}
             type={"text"}
             name={"title"}
-            placeholder={"Mini description (max 250 charactères)"}
+            placeholder={"Mini description (max 250 charactères) *"}
             max={100}
           />
-          <label>Description</label>
           <InputLargeText
             name={"description"}
-            placeholder={"Description"}
+            placeholder={"Description *"}
             text={description}
             setText={setDescription}
           />
-
-          <Btn txt={"Modifier l'actualité"} color={"gris"} type={"submit"} />
+          <Btn
+            msg={true}
+            txt={"Modifier l'actualité"}
+            color={"gris"}
+            type={"submit"}
+          />
         </div>
         <div className="sideRight">
           <InputFiles
@@ -152,18 +155,20 @@ const ModifActualite = () => {
             previousImg={previousImg}
             handleFiles={handleFiles}
             name={"img"}
-            label={"Photo de l'actualité"}
+            label={"Photo de l'actualité *"}
             title={"Image"}
             id={id}
             spectacle={actualite}
           />
           <InputSmallText
+            required={false}
             text={lien}
             setText={setLien}
             type={"text"}
             name={"lien"}
             placeholder={"Lien de l'actualité"}
           />
+          <label>Date de l'actualité *</label>
           <input
             type="date"
             name="date"

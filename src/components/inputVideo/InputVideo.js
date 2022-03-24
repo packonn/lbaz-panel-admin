@@ -4,7 +4,7 @@ const InputVideo = ({ setVideos, videos, required }) => {
   return (
     <div className="containerFiles">
       <div className="title">
-        <p>Videos</p>
+        <p>Lien vers vidéos Youtube *</p>
       </div>
       <div className="containerInput">
         <input

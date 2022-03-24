@@ -187,7 +187,7 @@ const AddSpectacle = () => {
             setText={setTitle}
             type={"text"}
             name={"title"}
-            placeholder={"Titre du Spectacle"}
+            placeholder={"Titre du Spectacle *"}
           />
           <InputSmallText
             required={true}
@@ -195,30 +195,27 @@ const AddSpectacle = () => {
             setText={setMinDescription}
             type={"text"}
             name={"title"}
-            placeholder={"Mini description (max 250 charactères)"}
+            placeholder={"Mini description (max 250 charactères) *"}
             max={100}
           />
-          <label>L'histoire</label>
           <InputLargeText
             name={"histoire"}
             required={true}
-            placeholder={"L'histoire"}
+            placeholder={"L'histoire *"}
             text={histoire}
             setText={setHistoire}
           />
-          <label>Intention de mise en scène</label>
           <InputLargeText
             required={true}
             name={"miseEnScene"}
-            placeholder={"Intention de mise en scène"}
+            placeholder={"Intention de mise en scène *"}
             text={mes}
             setText={setMes}
           />
-          <label>Note des auteurs</label>
           <InputLargeText
             required={true}
             name={"noteAuteur"}
-            placeholder={"Note des auteurs"}
+            placeholder={"Note des auteurs *"}
             text={noteAuteur}
             setText={setNoteAuteur}
           />
@@ -231,7 +228,12 @@ const AddSpectacle = () => {
             placeholder={"Lien vers BoxSongs"}
             max={100}
           />
-          <Btn txt={"Ajouter le spectacle"} color={"gris"} type={"submit"} />
+          <Btn
+            msg={true}
+            txt={"Ajouter le spectacle"}
+            color={"gris"}
+            type={"submit"}
+          />
         </div>
         <div className="sideRight">
           <InputFiles
@@ -243,7 +245,7 @@ const AddSpectacle = () => {
             handleFiles={handleFiles}
             name={"affiche"}
             label={"Affiche du spectacle"}
-            title={"Affiche"}
+            title={"Affiche (à la verticale)*"}
           />
           <InputFiles
             required={true}
@@ -254,7 +256,7 @@ const AddSpectacle = () => {
             handleFiles={handleFiles}
             name={"imgXL"}
             label={"Photo du spectacle"}
-            title={"Image"}
+            title={"Grande Image (à l'horizontale) *"}
           />
           <InputFiles
             required={true}
@@ -266,7 +268,7 @@ const AddSpectacle = () => {
             handleFiles={handleFiles}
             name={"musiques"}
             label={"Musique du spectacle"}
-            title={"Musiques"}
+            title={"Musiques *"}
           />
           <InputVideo setVideos={setVideos} videos={videos} required={true} />
         </div>

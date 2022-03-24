@@ -88,7 +88,7 @@ const AddEvent = () => {
               setText={setAdresse}
               type={"text"}
               name={"adresse"}
-              placeholder={"Adresse de l'événement"}
+              placeholder={"Adresse de l'événement *"}
             />
           </div>
 
@@ -98,7 +98,7 @@ const AddEvent = () => {
             setText={setBilleterie}
             type={"text"}
             name={"billeterie"}
-            placeholder={"Lien vers achat des billets"}
+            placeholder={"Lien vers le site d'achat des billets *"}
           />
           <div className="inputMarge">
             <InputDateTime onChange={onChangeDateTime} />
@@ -123,7 +123,12 @@ const AddEvent = () => {
             })}
           </select>
 
-          <Btn txt={"Ajouter l'événement"} color={"gris"} type={"submit"} />
+          <Btn
+            msg={true}
+            txt={"Ajouter l'événement"}
+            color={"gris"}
+            type={"submit"}
+          />
         </div>
         <div className="sideRight"></div>
       </form>
