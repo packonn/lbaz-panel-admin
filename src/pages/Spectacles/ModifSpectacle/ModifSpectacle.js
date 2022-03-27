@@ -81,16 +81,20 @@ const ModifSpectacle = () => {
       for (let i = 0; i <= newArray.length - 1; i++) {
         // Création d'un nouveau tableau avec que les nouvelles musique, en testant si elles sont deja présentes dans les musique de la BDD
         let testIfDoublon = false;
-        for (let y = 0; y <= musiques.length - 1; y++) {
-          if (deleteExtensionFile(newArray[i].name) === musiques[y].name) {
-            testIfDoublon = true;
+        if (musiques.length !== 0) {
+          for (let y = 0; y <= musiques.length - 1; y++) {
+            if (deleteExtensionFile(newArray[i].name) === musiques[y].name) {
+              testIfDoublon = true;
+            }
+            if (y === musiques.length - 1 && !testIfDoublon) {
+              newMusiqueWithoutDoublonWidthOldMusic.push(newArray[i]);
+            }
           }
-          if (y === musiques.length - 1 && !testIfDoublon) {
-            newMusiqueWithoutDoublonWidthOldMusic.push(newArray[i]);
-          }
+          setNewMusique(newMusiqueWithoutDoublonWidthOldMusic);
+        } else {
+          setNewMusique(newArray);
         }
       }
-      setNewMusique(newMusiqueWithoutDoublonWidthOldMusic);
     }
   };
   // logique video YT
@@ -175,7 +179,7 @@ const ModifSpectacle = () => {
   };
 
   return (
-    <div className="containerPage">
+    <div className='containerPage'>
       {isLoading && <IsLoading absolute />}
       <ToastContainer />
       <Header title={"Modification du spectacle"} />
@@ -183,9 +187,8 @@ const ModifSpectacle = () => {
         onSubmit={(e) => handleSubmit(e)}
         onKeyPress={(e) => {
           e.key === "Enter" && e.preventDefault();
-        }}
-      >
-        <div className="sideLeft">
+        }}>
+        <div className='sideLeft'>
           <InputSmallText
             text={title}
             setText={setTitle}
@@ -234,9 +237,9 @@ const ModifSpectacle = () => {
             type={"submit"}
           />
         </div>
-        <div className="sideRight">
+        <div className='sideRight'>
           <InputFiles
-            accept=".JPEG,.JPG,.PNG,.WEBP"
+            accept='.JPEG,.JPG,.PNG,.WEBP'
             spectacle={spectacle}
             affiche={affiche}
             previousAffiche={previousAffiche}
@@ -248,7 +251,7 @@ const ModifSpectacle = () => {
             id={id}
           />
           <InputFiles
-            accept=".JPEG,.JPG,.PNG,.WEBP"
+            accept='.JPEG,.JPG,.PNG,.WEBP'
             spectacle={spectacle}
             handleFiles={handleFiles}
             previousImgXL={previousImgXL}
@@ -259,7 +262,7 @@ const ModifSpectacle = () => {
             id={id}
           />
           <InputFiles
-            accept=".mp3,.mpeg"
+            accept='.mp3'
             setNewMusique={setNewMusique}
             setMusiques={setMusiques}
             id={id}
@@ -269,6 +272,7 @@ const ModifSpectacle = () => {
             name={"musiques"}
             label={"Musique du spectacle"}
             title={"Musiques *"}
+            setLoading={setLoading}
           />
           <InputVideo setVideos={setVideos} videos={videos} />
         </div>
