@@ -5,7 +5,7 @@
   align-items: center;
   min-height: 100vh;
   width: 20vw;
-  background: var(--black);
+  background: black;
 }
 .active {
   background-color: var(--bg-violet-clair);
@@ -17,7 +17,7 @@
   padding-top: 20px;
   width: 60px;
   min-height: 100vh;
-  background: var(--black);
+  background: black;
 }
 
 /* logo + burger */

@@ -6,14 +6,14 @@ import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Nav from "./components/Nav/Nav";
 import Actualite from "./pages/Actualite/Actualite";
-import AddActualite from "./pages/AddActualite/AddActualite";
-import AddSpectacle from "./pages/AddSpectacle/AddSpectacle";
+import AddActualite from "./pages/Actualite/AddActualite/AddActualite";
+import AddSpectacle from "./pages/Spectacles/AddSpectacle/AddSpectacle";
 import AddEvent from "./pages/Agenda/AddEvent/AddEvent";
 import Agenda from "./pages/Agenda/Agenda";
 import UpdateEvent from "./pages/Agenda/UpdateEvent/UpdateEvent";
 import Home from "./pages/Home/Home";
-import ModifActualite from "./pages/ModifActualite/ModifActualite";
-import ModifSpectacle from "./pages/ModifSpectacle/ModifSpectacle";
+import ModifActualite from "./pages/Actualite/ModifActualite/ModifActualite";
+import ModifSpectacle from "./pages/Spectacles/ModifSpectacle/ModifSpectacle";
 import Spectacles from "./pages/Spectacles/Spectacles";
 
 function App() {

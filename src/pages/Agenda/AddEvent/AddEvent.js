@@ -83,20 +83,22 @@ const AddEvent = () => {
         <div className="sideLeft">
           <div className="inputAdress">
             <InputSmallText
+              required={true}
               text={adresse}
               setText={setAdresse}
               type={"text"}
               name={"adresse"}
-              placeholder={"Adresse de l'événement"}
+              placeholder={"Adresse de l'événement *"}
             />
           </div>
 
           <InputSmallText
+            required={true}
             text={billeterie}
             setText={setBilleterie}
             type={"text"}
             name={"billeterie"}
-            placeholder={"Lien vers achat des billets"}
+            placeholder={"Lien vers le site d'achat des billets *"}
           />
           <div className="inputMarge">
             <InputDateTime onChange={onChangeDateTime} />
@@ -107,6 +109,7 @@ const AddEvent = () => {
             name="select"
             defaultValue={""}
             onChange={handleSelect}
+            required
           >
             <option value="" selected disabled>
               Sélectionnez un spectacle
@@ -120,7 +123,12 @@ const AddEvent = () => {
             })}
           </select>
 
-          <Btn txt={"Ajouter l'événement"} color={"gris"} type={"submit"} />
+          <Btn
+            msg={true}
+            txt={"Ajouter l'événement"}
+            color={"gris"}
+            type={"submit"}
+          />
         </div>
         <div className="sideRight"></div>
       </form>

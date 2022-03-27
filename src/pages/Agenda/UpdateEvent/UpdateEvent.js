@@ -103,7 +103,7 @@ const UpdateEvent = () => {
               setText={setAdresse}
               type={"text"}
               name={"adresse"}
-              placeholder={event.adresse}
+              placeholder={"Adresse de l'événement"}
             />
           </div>
 
@@ -112,7 +112,7 @@ const UpdateEvent = () => {
             setText={setBilleterie}
             type={"text"}
             name={"billeterie"}
-            placeholder={event.billeterie}
+            placeholder={"Lien vers le site d'achat des billets"}
           />
           <div className="inputMarge">
             <InputDateTime defaultValue={date} onChange={onChangeDateTime} />
@@ -131,7 +131,12 @@ const UpdateEvent = () => {
             })}
           </select>
 
-          <Btn txt={"Modifier l'événement"} color={"gris"} type={"submit"} />
+          <Btn
+            msg={true}
+            txt={"Modifier l'événement"}
+            color={"gris"}
+            type={"submit"}
+          />
         </div>
         <div className="sideRight"></div>
       </form>

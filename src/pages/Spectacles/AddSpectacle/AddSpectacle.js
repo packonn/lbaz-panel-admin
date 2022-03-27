@@ -2,20 +2,20 @@ import axios from "axios";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import Btn from "../../components/btn/Btn";
-import Header from "../../components/Header/Header";
-import InputFiles from "../../components/inputFiles/InputFiles";
-import InputLargeText from "../../components/inputLargeText/InputLargeText";
-import InputSmallText from "../../components/inputSmallText/InputSmallText";
-import InputVideo from "../../components/inputVideo/InputVideo";
-import IsLoading from "../../components/IsLoading/IsLoading";
+import Btn from "../../../components/btn/Btn";
+import Header from "../../../components/Header/Header";
+import InputFiles from "../../../components/inputFiles/InputFiles";
+import InputLargeText from "../../../components/inputLargeText/InputLargeText";
+import InputSmallText from "../../../components/inputSmallText/InputSmallText";
+import InputVideo from "../../../components/inputVideo/InputVideo";
+import IsLoading from "../../../components/IsLoading/IsLoading";
 import {
   api,
   deleteAndSortDoublon,
   notify,
   optionNotify,
   verifFormatMusic,
-} from "../../request/constant";
+} from "../../../request/constant";
 import "./addspectacle.css";
 
 const AddSpectacle = () => {
@@ -127,12 +127,13 @@ const AddSpectacle = () => {
       title &&
       mes &&
       noteAuteur &&
-      boxSong &&
+      // boxSong &&
       videos &&
       minDescription &&
       histoire &&
       previousAffiche &&
-      previousImgXL
+      previousImgXL &&
+      musiques.length !== 0
     ) {
       const response = await axios.post(
         `${api}spectacle/publication`,
@@ -168,7 +169,7 @@ const AddSpectacle = () => {
   };
 
   return (
-    <div className='containerPage'>
+    <div className="containerPage">
       <Header title={"Ajout d'un spectacle"} />
       <ToastContainer />
       {isLoading && <IsLoading absolute />}
@@ -177,45 +178,49 @@ const AddSpectacle = () => {
         onSubmit={(e) => handleSubmit(e)}
         onKeyPress={(e) => {
           e.key === "Enter" && e.preventDefault();
-        }}>
-        <div className='sideLeft'>
+        }}
+      >
+        <div className="sideLeft">
           <InputSmallText
+            required={true}
             text={title}
             setText={setTitle}
             type={"text"}
             name={"title"}
-            placeholder={"Titre du Spectacle"}
+            placeholder={"Titre du Spectacle *"}
           />
           <InputSmallText
+            required={true}
             text={minDescription}
             setText={setMinDescription}
             type={"text"}
             name={"title"}
-            placeholder={"Mini description (max 100 charactères)"}
+            placeholder={"Mini description (max 250 charactères) *"}
             max={100}
           />
-          <label>L'histoire</label>
           <InputLargeText
             name={"histoire"}
-            placeholder={"L'histoire"}
+            required={true}
+            placeholder={"L'histoire *"}
             text={histoire}
             setText={setHistoire}
           />
-          <label>Intention de mise en scène</label>
           <InputLargeText
+            required={true}
             name={"miseEnScene"}
-            placeholder={"Intention de mise en scène"}
+            placeholder={"Intention de mise en scène *"}
             text={mes}
             setText={setMes}
           />
-          <label>Note des auteurs</label>
           <InputLargeText
+            required={true}
             name={"noteAuteur"}
-            placeholder={"Note des auteurs"}
+            placeholder={"Note des auteurs *"}
             text={noteAuteur}
             setText={setNoteAuteur}
           />
           <InputSmallText
+            required={false}
             text={boxSong}
             setText={setBoxSong}
             type={"text"}
@@ -223,38 +228,49 @@ const AddSpectacle = () => {
             placeholder={"Lien vers BoxSongs"}
             max={100}
           />
-          <Btn txt={"Ajouter le spectacle"} color={"gris"} type={"submit"} />
+          <Btn
+            msg={true}
+            txt={"Ajouter le spectacle"}
+            color={"gris"}
+            type={"submit"}
+          />
         </div>
-        <div className='sideRight'>
+        <div className="sideRight">
           <InputFiles
-            type='ajout'
+            required={true}
+            accept=".JPEG,.JPG,.PNG,.WEBP"
+            type="ajout"
             setPreviousAffiche={setPreviousAffiche}
             previousAffiche={previousAffiche}
             handleFiles={handleFiles}
             name={"affiche"}
             label={"Affiche du spectacle"}
-            title={"Affiche"}
+            title={"Affiche (à la verticale)*"}
           />
           <InputFiles
-            type='ajout'
+            required={true}
+            type="ajout"
+            accept=".JPEG,.JPG,.PNG,.WEBP"
             setPreviousImgXL={setPreviousImgXL}
             previousImgXL={previousImgXL}
             handleFiles={handleFiles}
             name={"imgXL"}
             label={"Photo du spectacle"}
-            title={"Image"}
+            title={"Grande Image (à l'horizontale) *"}
           />
           <InputFiles
-            type='ajout'
+            required={true}
+            type="ajout"
+            accept=".mp3,.mpeg"
             setMusiques={setMusiques}
             // previousMusiques={previousMusiques}
             musiques={musiques}
             handleFiles={handleFiles}
             name={"musiques"}
             label={"Musique du spectacle"}
-            title={"Musiques"}
+            title={"Musiques *"}
           />
-          <InputVideo setVideos={setVideos} videos={videos} />
+          <InputVideo setVideos={setVideos} videos={videos} required={true} />
         </div>
       </form>
     </div>

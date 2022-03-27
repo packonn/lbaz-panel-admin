@@ -20,7 +20,7 @@
   background: var(--bg-violet-clair);
 }
 .title p {
-  font-size: 20px;
+  font-size: 18px;
 }
 .containerInput {
   display: flex;

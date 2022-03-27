@@ -2,13 +2,13 @@
 import axios from "axios";
 import { useState } from "react";
 import { ToastContainer } from "react-toastify";
-import Btn from "../../components/btn/Btn";
-import Header from "../../components/Header/Header";
-import InputFiles from "../../components/inputFiles/InputFiles";
-import InputLargeText from "../../components/inputLargeText/InputLargeText";
-import InputSmallText from "../../components/inputSmallText/InputSmallText";
-import IsLoading from "../../components/IsLoading/IsLoading";
-import { api, notify, optionNotify } from "../../request/constant";
+import Btn from "../../../components/btn/Btn";
+import Header from "../../../components/Header/Header";
+import InputFiles from "../../../components/inputFiles/InputFiles";
+import InputLargeText from "../../../components/inputLargeText/InputLargeText";
+import InputSmallText from "../../../components/inputSmallText/InputSmallText";
+import IsLoading from "../../../components/IsLoading/IsLoading";
+import { api, notify, optionNotify } from "../../../request/constant";
 const AddActualite = () => {
   //logique Files
   const [isLoading, setIsLoading] = useState(false);
@@ -88,7 +88,7 @@ const AddActualite = () => {
     }
   };
   return (
-    <div className='containerPage'>
+    <div className="containerPage">
       <Header title={"Ajout d'une actualité"} />
       <ToastContainer />
       {isLoading && <IsLoading absolute />}
@@ -97,42 +97,52 @@ const AddActualite = () => {
         onSubmit={(e) => handleSubmit(e)}
         onKeyPress={(e) => {
           e.key === "Enter" && e.preventDefault();
-        }}>
-        <div className='sideLeft'>
+        }}
+      >
+        <div className="sideLeft">
           <InputSmallText
             text={nom}
             setText={setNom}
             type={"text"}
             name={"title"}
-            placeholder={"Titre de l'actualité"}
+            required={true}
+            placeholder={"Titre de l'actualité *"}
           />
           <InputSmallText
             text={minDescription}
             setText={setMinDescription}
             type={"text"}
             name={"title"}
-            placeholder={"Mini description (max 100 charactères)"}
+            placeholder={"Mini description (max 250 charactères) *"}
             max={100}
+            required={true}
           />
-          <label>Description</label>
           <InputLargeText
             name={"description"}
-            placeholder={"Description"}
+            placeholder={"Description *"}
             text={description}
             setText={setDescription}
+            required={true}
           />
 
-          <Btn txt={"Ajouter une actualité"} color={"gris"} type={"submit"} />
+          <Btn
+            msg={true}
+            txt={"Ajouter une actualité"}
+            color={"gris"}
+            type={"submit"}
+          />
         </div>
-        <div className='sideRight'>
+        <div className="sideRight">
           <InputFiles
-            type='ajout'
+            type="ajout"
+            accept=".JPEG,.JPG,.PNG,.WEBP"
             setPreviousImg={setPreviousImg}
             previousImg={previousImg}
             handleFiles={handleFiles}
             name={"img"}
             label={"Photo de l'actualité"}
-            title={"Image"}
+            title={"Image *"}
+            required={true}
           />
           <InputSmallText
             text={lien}
@@ -140,16 +150,21 @@ const AddActualite = () => {
             type={"text"}
             name={"lien"}
             placeholder={"Lien de l'actualité"}
+            required={false}
           />
-          <input
-            type='date'
-            name='date'
-            id='inputDate'
-            defaultValue={today.toISOString().slice(0, 10)}
-            onChange={(e) => {
-              setDate(e.target.value);
-            }}
-          />
+          <label>
+            Date de l'événement *
+            <input
+              type="date"
+              name="date"
+              id="inputDate"
+              defaultValue={today.toISOString().slice(0, 10)}
+              onChange={(e) => {
+                setDate(e.target.value);
+              }}
+              required
+            />
+          </label>
         </div>
       </form>
     </div>

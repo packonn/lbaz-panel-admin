@@ -3,19 +3,19 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import Btn from "../../components/btn/Btn";
-import Header from "../../components/Header/Header";
-import InputFiles from "../../components/inputFiles/InputFiles";
-import InputLargeText from "../../components/inputLargeText/InputLargeText";
-import InputSmallText from "../../components/inputSmallText/InputSmallText";
-import InputVideo from "../../components/inputVideo/InputVideo";
-import IsLoading from "../../components/IsLoading/IsLoading";
+import Btn from "../../../components/btn/Btn";
+import Header from "../../../components/Header/Header";
+import InputFiles from "../../../components/inputFiles/InputFiles";
+import InputLargeText from "../../../components/inputLargeText/InputLargeText";
+import InputSmallText from "../../../components/inputSmallText/InputSmallText";
+import InputVideo from "../../../components/inputVideo/InputVideo";
+import IsLoading from "../../../components/IsLoading/IsLoading";
 import {
   api,
   deleteExtensionFile,
   notify,
   optionNotify,
-} from "../../request/constant";
+} from "../../../request/constant";
 
 const ModifSpectacle = () => {
   const { id } = useParams();
@@ -81,16 +81,20 @@ const ModifSpectacle = () => {
       for (let i = 0; i <= newArray.length - 1; i++) {
         // Création d'un nouveau tableau avec que les nouvelles musique, en testant si elles sont deja présentes dans les musique de la BDD
         let testIfDoublon = false;
-        for (let y = 0; y <= musiques.length - 1; y++) {
-          if (deleteExtensionFile(newArray[i].name) === musiques[y].name) {
-            testIfDoublon = true;
+        if (musiques.length !== 0) {
+          for (let y = 0; y <= musiques.length - 1; y++) {
+            if (deleteExtensionFile(newArray[i].name) === musiques[y].name) {
+              testIfDoublon = true;
+            }
+            if (y === musiques.length - 1 && !testIfDoublon) {
+              newMusiqueWithoutDoublonWidthOldMusic.push(newArray[i]);
+            }
           }
-          if (y === musiques.length - 1 && !testIfDoublon) {
-            newMusiqueWithoutDoublonWidthOldMusic.push(newArray[i]);
-          }
+          setNewMusique(newMusiqueWithoutDoublonWidthOldMusic);
+        } else {
+          setNewMusique(newArray);
         }
       }
-      setNewMusique(newMusiqueWithoutDoublonWidthOldMusic);
     }
   };
   // logique video YT
@@ -175,7 +179,7 @@ const ModifSpectacle = () => {
   };
 
   return (
-    <div className="containerPage">
+    <div className='containerPage'>
       {isLoading && <IsLoading absolute />}
       <ToastContainer />
       <Header title={"Modification du spectacle"} />
@@ -183,42 +187,38 @@ const ModifSpectacle = () => {
         onSubmit={(e) => handleSubmit(e)}
         onKeyPress={(e) => {
           e.key === "Enter" && e.preventDefault();
-        }}
-      >
-        <div className="sideLeft">
+        }}>
+        <div className='sideLeft'>
           <InputSmallText
             text={title}
             setText={setTitle}
             type={"text"}
             name={"title"}
-            placeholder={"Titre du Spectacle"}
+            placeholder={"Titre du Spectacle *"}
           />
           <InputSmallText
             text={minDescription}
             setText={setMinDescription}
             type={"text"}
             name={"title"}
-            placeholder={"Mini description (max 100 charactères)"}
+            placeholder={"Mini description (max 250 charactères) *"}
             max={200}
           />
-          <label>L'histoire</label>
           <InputLargeText
             name={"histoire"}
-            placeholder={"L'histoire"}
+            placeholder={"L'histoire *"}
             text={histoire}
             setText={setHistoire}
           />
-          <label>Intention de mise en scène</label>
           <InputLargeText
             name={"miseEnScene"}
-            placeholder={"Intention de mise en scène"}
+            placeholder={"Intention de mise en scène *"}
             text={mes}
             setText={setMes}
           />
-          <label>Note des auteurs</label>
           <InputLargeText
             name={"noteAuteur"}
-            placeholder={"Note des auteurs"}
+            placeholder={"Note des auteurs *"}
             text={noteAuteur}
             setText={setNoteAuteur}
           />
@@ -230,31 +230,39 @@ const ModifSpectacle = () => {
             placeholder={"Lien vers BoxSongs"}
             max={100}
           />
-          <Btn txt={"Modifier le spectacle"} color={"gris"} type={"submit"} />
+          <Btn
+            msg={true}
+            txt={"Modifier le spectacle"}
+            color={"gris"}
+            type={"submit"}
+          />
         </div>
-        <div className="sideRight">
+        <div className='sideRight'>
           <InputFiles
+            accept='.JPEG,.JPG,.PNG,.WEBP'
             spectacle={spectacle}
             affiche={affiche}
             previousAffiche={previousAffiche}
             handleFiles={handleFiles}
             name={"affiche"}
             label={"Affiche du spectacle"}
-            title={"Affiche"}
+            title={"Affiche (à la verticale)*"}
             setPreviousAffiche={setPreviousAffiche}
             id={id}
           />
           <InputFiles
+            accept='.JPEG,.JPG,.PNG,.WEBP'
             spectacle={spectacle}
             handleFiles={handleFiles}
             previousImgXL={previousImgXL}
             name={"imgXL"}
             label={"Photo du spectacle"}
-            title={"Image"}
+            title={"Grande image (à l'horizontale)*"}
             setPreviousImgXL={setPreviousImgXL}
             id={id}
           />
           <InputFiles
+            accept='.mp3'
             setNewMusique={setNewMusique}
             setMusiques={setMusiques}
             id={id}
@@ -263,7 +271,8 @@ const ModifSpectacle = () => {
             handleFiles={handleFiles}
             name={"musiques"}
             label={"Musique du spectacle"}
-            title={"Musiques"}
+            title={"Musiques *"}
+            setLoading={setLoading}
           />
           <InputVideo setVideos={setVideos} videos={videos} />
         </div>

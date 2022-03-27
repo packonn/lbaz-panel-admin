@@ -25,3 +25,6 @@
   display: flex;
   font-family: "Roboto", sans-serif;
 }
+.required {
+  margin: 10px 0;
+}

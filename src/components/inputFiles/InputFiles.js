@@ -10,6 +10,9 @@ import {
 import "./inputFiles.css";
 
 const InputFiles = ({
+  setLoading,
+  required,
+  accept,
   type,
   name,
   label,
@@ -39,6 +42,7 @@ const InputFiles = ({
         setMusiques(newTabMusiqueFiltered);
         // notify("success", `Musique supprimée`, optionNotify);
       } else {
+        setLoading(true);
         const newTabMusicUpdateFiltered = musiques.filter(
           (musique) => musique.secure_url !== e.secure_url
         );
@@ -55,6 +59,7 @@ const InputFiles = ({
             } else {
               notify("error", `Une erreur est survenue`, optionNotify);
             }
+            setLoading(false);
           });
       }
     }
@@ -145,7 +150,9 @@ const InputFiles = ({
             ajouter un fichier
           </span>
           <input
-            type='file'
+            required={required}
+            type={"file"}
+            accept={accept}
             multiple
             disabled={
               previousImgXL || previousAffiche || previousImg ? true : false
