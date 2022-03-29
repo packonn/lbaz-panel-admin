@@ -5,13 +5,16 @@ const InputLargeText = ({ name, placeholder, text, setText, required }) => {
     <label>
       {placeholder}
       <textarea
+        rows='5'
+        cols='33'
         value={text}
         onChange={(e) => setText(e.target.value)}
         id={name}
         name={name}
+        Wrap
         required={required}
         // placeholder={placeholder}
-      ></textarea>{" "}
+      ></textarea>
     </label>
   );
 };

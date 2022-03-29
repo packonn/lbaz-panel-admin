@@ -185,9 +185,10 @@ const ModifSpectacle = () => {
       <Header title={"Modification du spectacle"} />
       <form
         onSubmit={(e) => handleSubmit(e)}
-        onKeyPress={(e) => {
-          e.key === "Enter" && e.preventDefault();
-        }}>
+        // onKeyPress={(e) => {
+        //   e.key === "Enter" && e.preventDefault();
+        // }}
+      >
         <div className='sideLeft'>
           <InputSmallText
             text={title}
@@ -222,6 +223,7 @@ const ModifSpectacle = () => {
             text={noteAuteur}
             setText={setNoteAuteur}
           />
+
           <InputSmallText
             text={boxSong}
             setText={setBoxSong}
