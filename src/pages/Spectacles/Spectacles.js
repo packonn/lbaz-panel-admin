@@ -45,6 +45,7 @@ const Spectacles = ({ search, setSearch }) => {
       </div>
 
       <List
+        isNotdragable={false}
         key1Filtered={"nom"}
         key2Filtered={""}
         search={search}

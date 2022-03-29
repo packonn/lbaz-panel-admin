@@ -7,7 +7,14 @@ import { filteredData } from "../ListFiltered/ListFiltered";
 import OptionDots from "../optionDots/OptionDots";
 import "./list.css";
 
-const List = ({ list, page, search, key1Filtered, key2Filtered }) => {
+const List = ({
+  list,
+  page,
+  search,
+  key1Filtered,
+  key2Filtered,
+  isNotdragable,
+}) => {
   const [display, setDisplay] = useState();
 
   const handleDisplay = (id) => {
@@ -81,7 +88,6 @@ const List = ({ list, page, search, key1Filtered, key2Filtered }) => {
         <p>{page === "agenda" ? "Date" : "Mini description"}</p>
         <p>Options</p>
       </div>
-
       <DragDropContext onDragEnd={handleOnDragEnd}>
         <Droppable droppableId='characters'>
           {(provided) => (
@@ -92,7 +98,11 @@ const List = ({ list, page, search, key1Filtered, key2Filtered }) => {
               {filteredData(spectacles, search, key1Filtered, key2Filtered).map(
                 ({ _id, nom, minDescription, date, spectacle }, index) => {
                   return (
-                    <Draggable key={_id} draggableId={_id} index={index}>
+                    <Draggable
+                      isDragDisabled={isNotdragable}
+                      key={_id}
+                      draggableId={_id}
+                      index={index}>
                       {(provided) => (
                         <div
                           className='rowTabSpectacles'
@@ -100,14 +110,21 @@ const List = ({ list, page, search, key1Filtered, key2Filtered }) => {
                           {...provided.draggableProps}
                           {...provided.dragHandleProps}>
                           <p>{page === "agenda" ? spectacle.nom : nom}</p>
+
+                          {console.log("date", date)}
                           <p>
                             {minDescription ||
-                              new Date(date).toLocaleDateString("fr-FR", {
-                                weekday: "short",
-                                year: "2-digit",
-                                month: "long",
-                                day: "numeric",
-                              })}
+                              new Date(date.slice(0, 16)).toLocaleTimeString(
+                                "FR",
+                                {
+                                  weekday: "short",
+                                  year: "2-digit",
+                                  month: "long",
+                                  day: "numeric",
+                                  hour: "2-digit",
+                                  minute: "2-digit",
+                                }
+                              )}
                           </p>
                           <span
                             onClick={() => {
@@ -136,7 +153,6 @@ const List = ({ list, page, search, key1Filtered, key2Filtered }) => {
           )}
         </Droppable>
       </DragDropContext>
-
       <ToastContainer />
     </div>
   );

@@ -7,11 +7,12 @@ import IsLoading from "../../../components/IsLoading/IsLoading";
 import { getAllSpectacle } from "../../../request/spectacle";
 import InputDateTime from "../../../components/inputDateTime/inputDateTime";
 import { ToastContainer } from "react-toastify";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import { notify, optionNotify } from "../../../request/constant";
 
 const UpdateEvent = () => {
+  const navigate = useNavigate();
   // logique text input
   const [isLoading, setIsLoading] = useState(true);
   const [event, setEvent] = useState({});
@@ -34,7 +35,7 @@ const UpdateEvent = () => {
     setEvent(event);
     setBilleterie(event.billeterie);
     setAdresse(event.adresse);
-    setDate(event.date);
+    setDate(event.date.slice(0, 16));
     setSpectacleIdSelected(event.spectacle._id);
   };
 
@@ -61,6 +62,7 @@ const UpdateEvent = () => {
       if (response.status === 200) {
         setIsLoading(false);
         notify("success", "Événement modifié avec succès !", optionNotify);
+        navigate("/agenda");
       } else {
         setIsLoading(false);
         notify("error", "Une erreur est survenue !", optionNotify);
@@ -81,10 +83,11 @@ const UpdateEvent = () => {
   const onChangeDateTime = (value) => {
     // Selection de la date et l'heure
     setDate(value);
+    console.log("value", value);
   };
 
   return (
-    <div className="containerPage">
+    <div className='containerPage'>
       {isLoading && <IsLoading absolute />}
       <div>
         <ToastContainer />
@@ -94,10 +97,9 @@ const UpdateEvent = () => {
         onSubmit={(e) => handleSubmit(e)}
         onKeyPress={(e) => {
           e.key === "Enter" && e.preventDefault();
-        }}
-      >
-        <div className="sideLeft">
-          <div className="inputAdress">
+        }}>
+        <div className='sideLeft'>
+          <div className='inputAdress'>
             <InputSmallText
               text={adresse}
               setText={setAdresse}
@@ -114,17 +116,16 @@ const UpdateEvent = () => {
             name={"billeterie"}
             placeholder={"Lien vers le site d'achat des billets"}
           />
-          <div className="inputMarge">
+          <div className='inputMarge'>
             <InputDateTime defaultValue={date} onChange={onChangeDateTime} />
           </div>
-          <select className="inputMarge" name="select" onChange={handleSelect}>
+          <select className='inputMarge' name='select' onChange={handleSelect}>
             {allSpectacle.map((spectacle, index) => {
               return (
                 <option
                   key={index}
                   selected={spectacle._id === spectacleSelected ? true : false}
-                  value={spectacle._id}
-                >
+                  value={spectacle._id}>
                   {spectacle.nom}
                 </option>
               );
@@ -138,7 +139,7 @@ const UpdateEvent = () => {
             type={"submit"}
           />
         </div>
-        <div className="sideRight"></div>
+        <div className='sideRight'></div>
       </form>
     </div>
   );

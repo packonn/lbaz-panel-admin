@@ -1,7 +1,7 @@
 // import './modifactualite.css'
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import Btn from "../../../components/btn/Btn";
 import Header from "../../../components/Header/Header";
@@ -11,6 +11,7 @@ import InputSmallText from "../../../components/inputSmallText/InputSmallText";
 import IsLoading from "../../../components/IsLoading/IsLoading";
 import { api, notify, optionNotify } from "../../../request/constant";
 const ModifActualite = () => {
+  const navigate = useNavigate();
   const { id } = useParams();
   // Date d'aujourd'hui
   const today = new Date();
@@ -23,7 +24,7 @@ const ModifActualite = () => {
   const [minDescription, setMinDescription] = useState("");
   const [description, setDescription] = useState("");
   const [lien, setLien] = useState("");
-  const [date, setDate] = useState(today.toISOString().slice(0, 10));
+  const [date, setDate] = useState("");
   const [actualite, setActualite] = useState();
 
   //logique Files
@@ -94,6 +95,7 @@ const ModifActualite = () => {
           if (response.status === 200) {
             // fetchSpectacle();
             notify("success", "Événement modifié avec succès !", optionNotify);
+            navigate("/actualite");
           } else {
             notify("error", "Une erreur est survenue !", optionNotify);
           }
@@ -108,7 +110,7 @@ const ModifActualite = () => {
     }
   };
   return (
-    <div className="containerPage">
+    <div className='containerPage'>
       <Header title={"Modifier l'actualité"} />
       <ToastContainer />
       {isLoading && <IsLoading absolute />}
@@ -117,9 +119,8 @@ const ModifActualite = () => {
         onSubmit={(e) => handleSubmit(e)}
         onKeyPress={(e) => {
           e.key === "Enter" && e.preventDefault();
-        }}
-      >
-        <div className="sideLeft">
+        }}>
+        <div className='sideLeft'>
           <InputSmallText
             text={nom}
             setText={setNom}
@@ -148,9 +149,9 @@ const ModifActualite = () => {
             type={"submit"}
           />
         </div>
-        <div className="sideRight">
+        <div className='sideRight'>
           <InputFiles
-            accept=".JPEG,.JPG,.PNG,.WEBP"
+            accept='.JPEG,.JPG,.PNG,.WEBP'
             setPreviousImg={setPreviousImg}
             previousImg={previousImg}
             handleFiles={handleFiles}
@@ -170,10 +171,10 @@ const ModifActualite = () => {
           />
           <label>Date de l'actualité *</label>
           <input
-            type="date"
-            name="date"
-            id="inputDate"
-            defaultValue={today.toISOString().slice(0, 10)}
+            type='date'
+            name='date'
+            id='inputDate'
+            defaultValue={date.slice(0, 10)}
             onChange={(e) => {
               setDate(e.target.value);
             }}

@@ -41,6 +41,7 @@ const Actualite = ({ search, setSearch }) => {
       </div>
 
       <List
+        isNotdragable={true}
         key1Filtered={"nom"}
         key2Filtered={""}
         search={search}

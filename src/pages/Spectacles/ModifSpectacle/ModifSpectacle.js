@@ -1,7 +1,7 @@
 // import './modifspectacle.css'
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import Btn from "../../../components/btn/Btn";
 import Header from "../../../components/Header/Header";
@@ -18,6 +18,7 @@ import {
 } from "../../../request/constant";
 
 const ModifSpectacle = () => {
+  const navigate = useNavigate();
   const { id } = useParams();
   const [isLoading, setLoading] = useState(true);
 
@@ -164,6 +165,8 @@ const ModifSpectacle = () => {
           if (response.status === 200) {
             // fetchSpectacle();
             notify("success", "Événement modifié avec succès !", optionNotify);
+            // Retour à la home pour reload bien toutes les infos
+            navigate("/spectacles");
           } else {
             notify("error", "Une erreur est survenue !", optionNotify);
           }
@@ -273,7 +276,7 @@ const ModifSpectacle = () => {
             handleFiles={handleFiles}
             name={"musiques"}
             label={"Musique du spectacle"}
-            title={"Musiques *"}
+            title={"Musiques"}
             setLoading={setLoading}
           />
           <InputVideo setVideos={setVideos} videos={videos} />

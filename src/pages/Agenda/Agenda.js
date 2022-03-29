@@ -13,7 +13,6 @@ import { getAllEvents } from "../../request/agenda";
 
 import { ToastContainer } from "react-toastify";
 
-
 const Agenda = ({ search, setSearch }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [allEvents, setAllEvents] = useState([]);
@@ -48,6 +47,7 @@ const Agenda = ({ search, setSearch }) => {
         </Link>
       </div>
       <List
+        isNotdragable={true}
         list={allEvents}
         reload={fetchAllEvents}
         page='agenda'

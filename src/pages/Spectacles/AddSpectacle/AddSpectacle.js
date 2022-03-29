@@ -132,8 +132,9 @@ const AddSpectacle = () => {
       minDescription &&
       histoire &&
       previousAffiche &&
-      previousImgXL &&
-      musiques.length !== 0
+      previousImgXL
+      // &&
+      // musiques.length !== 0
     ) {
       const response = await axios.post(
         `${api}spectacle/publication`,
@@ -169,7 +170,7 @@ const AddSpectacle = () => {
   };
 
   return (
-    <div className="containerPage">
+    <div className='containerPage'>
       <Header title={"Ajout d'un spectacle"} />
       <ToastContainer />
       {isLoading && <IsLoading absolute />}
@@ -178,9 +179,8 @@ const AddSpectacle = () => {
         onSubmit={(e) => handleSubmit(e)}
         onKeyPress={(e) => {
           e.key === "Enter" && e.preventDefault();
-        }}
-      >
-        <div className="sideLeft">
+        }}>
+        <div className='sideLeft'>
           <InputSmallText
             required={true}
             text={title}
@@ -235,11 +235,11 @@ const AddSpectacle = () => {
             type={"submit"}
           />
         </div>
-        <div className="sideRight">
+        <div className='sideRight'>
           <InputFiles
             required={true}
-            accept=".JPEG,.JPG,.PNG,.WEBP"
-            type="ajout"
+            accept='.JPEG,.JPG,.PNG,.WEBP'
+            type='ajout'
             setPreviousAffiche={setPreviousAffiche}
             previousAffiche={previousAffiche}
             handleFiles={handleFiles}
@@ -249,8 +249,8 @@ const AddSpectacle = () => {
           />
           <InputFiles
             required={true}
-            type="ajout"
-            accept=".JPEG,.JPG,.PNG,.WEBP"
+            type='ajout'
+            accept='.JPEG,.JPG,.PNG,.WEBP'
             setPreviousImgXL={setPreviousImgXL}
             previousImgXL={previousImgXL}
             handleFiles={handleFiles}
@@ -259,16 +259,16 @@ const AddSpectacle = () => {
             title={"Grande Image (à l'horizontale) *"}
           />
           <InputFiles
-            required={true}
-            type="ajout"
-            accept=".mp3,.mpeg"
+            required={false}
+            type='ajout'
+            accept='.mp3,.mpeg'
             setMusiques={setMusiques}
             // previousMusiques={previousMusiques}
             musiques={musiques}
             handleFiles={handleFiles}
             name={"musiques"}
             label={"Musique du spectacle"}
-            title={"Musiques *"}
+            title={"Musiques"}
           />
           <InputVideo setVideos={setVideos} videos={videos} required={true} />
         </div>
