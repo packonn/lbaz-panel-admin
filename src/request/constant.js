@@ -38,18 +38,22 @@ export const deleteExtensionFile = (fileName) => {
 };
 
 export const sortMusic = (musicTab) => {
-  // Trie les musiques
-  return musicTab.sort((a, b) => {
-    let fa = a.name.toLowerCase(),
-      fb = b.name.toLowerCase();
-    if (fa < fb) {
-      return -1;
-    }
-    if (fa > fb) {
-      return 1;
-    }
-    return 0;
-  });
+  if (musicTab.length !== 0) {
+    // Trie les musiques
+    return musicTab.sort((a, b) => {
+      let fa = a.name.toLowerCase(),
+        fb = b.name.toLowerCase();
+      if (fa < fb) {
+        return -1;
+      }
+      if (fa > fb) {
+        return 1;
+      }
+      return 0;
+    });
+  } else {
+    return [];
+  }
 };
 
 export const deleteAndSortDoublon = (arr) => {

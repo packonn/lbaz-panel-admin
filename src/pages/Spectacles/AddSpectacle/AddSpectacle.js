@@ -99,6 +99,7 @@ const AddSpectacle = () => {
   const [histoire, setHistoire] = useState("");
   const [mes, setMes] = useState("");
   const [noteAuteur, setNoteAuteur] = useState("");
+  const [avis, setAvis] = useState("");
 
   // Envoie du formulaire
   const handleSubmit = async (e) => {
@@ -116,6 +117,7 @@ const AddSpectacle = () => {
     formData.append("imgXL", imgXL);
     formData.append("video", videos);
     formData.append("clef", state.length);
+    formData.append("avis", avis);
 
     let i = 0;
     musiques.forEach((file) => {
@@ -154,6 +156,7 @@ const AddSpectacle = () => {
         setPreviousAffiche("");
         setPreviousImgXL("");
         setVideos("");
+        setAvis("");
         notify("success", "Le spectacle a bien été ajouté !", optionNotify);
       } else {
         setIsLoading(false);
@@ -196,7 +199,7 @@ const AddSpectacle = () => {
             type={"text"}
             name={"title"}
             placeholder={"Mini description (max 250 charactères) *"}
-            max={100}
+            max={250}
           />
           <InputLargeText
             name={"histoire"}
@@ -226,8 +229,9 @@ const AddSpectacle = () => {
             type={"text"}
             name={"achat"}
             placeholder={"Lien vers BoxSongs"}
-            max={100}
+            max={250}
           />
+
           <Btn
             msg={true}
             txt={"Ajouter le spectacle"}
@@ -271,6 +275,15 @@ const AddSpectacle = () => {
             title={"Musiques"}
           />
           <InputVideo setVideos={setVideos} videos={videos} required={true} />
+          <InputSmallText
+            required={false}
+            text={avis}
+            setText={setAvis}
+            type={"text"}
+            name={"avis"}
+            placeholder={"Lien vers les avis"}
+            max={250}
+          />
         </div>
       </form>
     </div>

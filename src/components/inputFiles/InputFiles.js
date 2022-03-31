@@ -190,25 +190,26 @@ const InputFiles = ({
         </div>
       ) : musiques ? (
         <div className='previous'>
-          {sortMusic(musiques).map((e, i) => {
-            return (
-              <div
-                key={i}
-                className={
-                  musiques.length > 0 || newMusique.length > 0
-                    ? "previousMusic dashed line"
-                    : "previousMusic line "
-                }>
-                <p>{deleteExtensionFile(e.name)}</p>
-                <FontAwesomeIcon
-                  icon='times'
-                  color='black'
-                  style={{ cursor: "pointer" }}
-                  onClick={() => deleteItem(e, "musique")}
-                />
-              </div>
-            );
-          })}
+          {musiques.length !== 0 &&
+            sortMusic(musiques).map((e, i) => {
+              return (
+                <div
+                  key={i}
+                  className={
+                    musiques.length > 0 || newMusique.length > 0
+                      ? "previousMusic dashed line"
+                      : "previousMusic line "
+                  }>
+                  <p>{deleteExtensionFile(e.name)}</p>
+                  <FontAwesomeIcon
+                    icon='times'
+                    color='black'
+                    style={{ cursor: "pointer" }}
+                    onClick={() => deleteItem(e, "musique")}
+                  />
+                </div>
+              );
+            })}
           {/* ajout de nouvelle musique pendant la modification */}
           {newMusique && newMusique.length !== 0 && (
             <p

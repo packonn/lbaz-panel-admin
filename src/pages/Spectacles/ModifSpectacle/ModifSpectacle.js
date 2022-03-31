@@ -30,6 +30,7 @@ const ModifSpectacle = () => {
   const [histoire, setHistoire] = useState("");
   const [mes, setMes] = useState("");
   const [noteAuteur, setNoteAuteur] = useState("");
+  const [avis, setAvis] = useState("");
   //logique Files
   const [affiche, setAffiche] = useState();
   const [previousAffiche, setPreviousAffiche] = useState("");
@@ -114,6 +115,8 @@ const ModifSpectacle = () => {
     setNoteAuteur(result.data.note_des_auteurs);
     setVideos(result.data.video);
     setMusiques(tabMusiques);
+    setAvis(result.data.avis ? result.data.avis : "");
+
     if (result.data.affiche) {
       setPreviousAffiche(result.data.affiche.secure_url);
     } else {
@@ -146,6 +149,7 @@ const ModifSpectacle = () => {
     formData.append("affiche", affiche);
     formData.append("imgXL", imgXL);
     formData.append("video", videos);
+    formData.append("avis", avis);
     let i = 0;
     newMusique.forEach((file) => {
       i++;
@@ -280,6 +284,15 @@ const ModifSpectacle = () => {
             setLoading={setLoading}
           />
           <InputVideo setVideos={setVideos} videos={videos} />
+          <InputSmallText
+            required={false}
+            text={avis}
+            setText={setAvis}
+            type={"text"}
+            name={"avis"}
+            placeholder={"Lien vers les avis"}
+            max={250}
+          />
         </div>
       </form>
     </div>
