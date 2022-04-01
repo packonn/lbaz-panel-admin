@@ -115,11 +115,7 @@ const ModifActualite = () => {
       <ToastContainer />
       {isLoading && <IsLoading absolute />}
 
-      <form
-        onSubmit={(e) => handleSubmit(e)}
-        onKeyPress={(e) => {
-          e.key === "Enter" && e.preventDefault();
-        }}>
+      <form onSubmit={(e) => handleSubmit(e)}>
         <div className='sideLeft'>
           <InputSmallText
             text={nom}

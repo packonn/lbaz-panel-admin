@@ -18,7 +18,6 @@ const AddActualite = () => {
 
   const handleFiles = (e, name) => {
     // Ajout des fichiers
-
     if (name === "img") {
       if (
         e.target.files[0].size < 10485760 &&
@@ -88,18 +87,13 @@ const AddActualite = () => {
     }
   };
   return (
-    <div className="containerPage">
+    <div className='containerPage'>
       <Header title={"Ajout d'une actualité"} />
       <ToastContainer />
       {isLoading && <IsLoading absolute />}
 
-      <form
-        onSubmit={(e) => handleSubmit(e)}
-        onKeyPress={(e) => {
-          e.key === "Enter" && e.preventDefault();
-        }}
-      >
-        <div className="sideLeft">
+      <form onSubmit={(e) => handleSubmit(e)}>
+        <div className='sideLeft'>
           <InputSmallText
             text={nom}
             setText={setNom}
@@ -132,10 +126,10 @@ const AddActualite = () => {
             type={"submit"}
           />
         </div>
-        <div className="sideRight">
+        <div className='sideRight'>
           <InputFiles
-            type="ajout"
-            accept=".JPEG,.JPG,.PNG,.WEBP"
+            type='ajout'
+            accept='.JPEG,.JPG,.PNG,.WEBP'
             setPreviousImg={setPreviousImg}
             previousImg={previousImg}
             handleFiles={handleFiles}
@@ -155,9 +149,9 @@ const AddActualite = () => {
           <label>
             Date de l'événement *
             <input
-              type="date"
-              name="date"
-              id="inputDate"
+              type='date'
+              name='date'
+              id='inputDate'
               defaultValue={today.toISOString().slice(0, 10)}
               onChange={(e) => {
                 setDate(e.target.value);
